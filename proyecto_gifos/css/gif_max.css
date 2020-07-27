@@ -1,0 +1,93 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+html {
+    font-size: 62.5%; /*1 rem = 10px; 10px/16px = 62.5%*/
+}
+p, h1, h2{
+    text-align: center;
+}
+body a {
+    text-decoration: none;
+    text-align: center;
+}
+header {
+    height: 10rem;
+    border-top: #572EE5 0.5rem solid;
+}
+.mobile-logo {
+    width: 5.4rem;
+    height: 4.9rem;
+    margin-top: 2.9rem;
+    margin-left: 2.2rem;
+    float: left;
+}
+
+/*GIF MAXIMIZADO*/
+
+#gif-max {
+    width: 100%;
+    height: fit-content;
+    background-color: rgba(255,255,255,0.90);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 5;
+    padding-top: 6.4rem;
+    padding-bottom: 12.6rem;
+}
+#gif-max .close img {
+    display: block;
+    margin-left: auto;
+    margin-right: 3.93rem;
+}
+#gif-maximizado {
+    width: 31.8rem;
+    height: 24.5rem;
+    display: block;
+    margin: 7.8rem auto 1.4rem auto;
+}
+.grid {
+    display: grid;
+    grid-template-rows: 1.8rem 2.5rem;
+    grid-template-columns: 23.15rem 4.25rem 4.25rem;
+    grid-template-areas: "a b c"
+                         "d b c";
+    justify-content: center;
+}
+#item1 {
+    grid-area: a;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    text-align: left;
+    margin-left: 0.6rem;
+}
+#item2 {
+    grid-area: d;
+    align-self: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: left;
+}
+#item3 {
+    grid-area: b;
+    align-self: center;
+}
+#item4 {
+    grid-area: c;
+    width: 1.92rem;
+    height: 2.11rem;
+    box-sizing: content-box;
+    opacity: 0.5;
+    border: 1px solid #9CAFC3;
+    align-self: center;
+    justify-self: end;
+    border-radius: 6px;
+    padding: 0.64rem 0.74rem;
+}
