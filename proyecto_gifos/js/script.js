@@ -14,8 +14,7 @@ function inputSearch() {
 
     let p = document.getElementsByClassName("list-p"); //después que los crea crearSugerencia()
 
-    if(inactivo.className == "inactivo inactivo-activo"
-       && input.value == "") {
+    if(input.value === "") {
 
         input.classList.remove("input-activo");
         inactivo.classList.remove("inactivo-activo");
@@ -33,12 +32,8 @@ function inputSearch() {
         imgSearch.setAttribute("src", "images/icon-search.svg");
         imgSearch.classList.remove("img-close");
         imgSearch.classList.add("search-icon");
-        return;
-    }
-
     
-
-    if(lista.firstElementChild !== null) { //si no hay sugerencias en el input
+    }else if(lista.firstElementChild !== null) { //si hay sugerencias en el input
 
         input.classList.add("input-activo");
         inactivo.classList.add("inactivo-activo");
@@ -56,6 +51,7 @@ function inputSearch() {
         imgSearch.setAttribute("src", "images/close.svg"); //cambio el icono de búsqueda
         imgSearch.classList.remove("search-icon");
         imgSearch.classList.add("img-close");
+
     }
 }
 
@@ -79,9 +75,18 @@ function closeInputSearch () {
     imgSearch.setAttribute("src", "images/icon-search.svg");
     imgSearch.classList.remove("img-close");
     imgSearch.classList.add("search-icon");
+
 }
 
-input.addEventListener("click", inputSearch);
+input.addEventListener("click", () => {
+
+    if( input.value === "") {
+        closeInputSearch();
+        return;
+    }
+    
+    inputSearch();
+});
 
 document.addEventListener("click", event => {
 
@@ -163,7 +168,6 @@ async function getGif(url, value, api_key, number) {
     let endPoint =`http://${url}?q=${value}&api_key=${api_key}&limit=${number}&lang=es`;
     const resp = await fetch(endPoint);
     const data = await resp.json();
-    console.log(data);
     return data;
 };
 
@@ -214,8 +218,11 @@ function crearSugerencia(string) {
 
 imgSearch.addEventListener("click", event => {
 
-    if(imgSearch.getAttribute("src") == "images/close.svg") {
+    if(imgSearch.getAttribute("src") == "images/close.svg"
+       || input.value == "") {
+
         lista.innerHTML = "";
+        input.value = "";
         event.preventDefault();
         closeInputSearch();
         return;

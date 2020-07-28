@@ -142,9 +142,6 @@ span.hamburguesa {
 .sugerencias, .inactivo {
     display: none;
 }
-.sin-resultados {
-    display: none;
-}
 #input-busqueda {
     border: 0.1rem #572EE5 solid;
     border-radius: 2.7rem;
@@ -217,11 +214,12 @@ span.separacion {
 .galeria-imagenes {
     display: flex;
     flex-flow: row wrap;
-    padding: 0 2.1rem;
+    justify-content: center;
 }
 .galeria-imagenes .imagen {
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: 1.05rem;
+    margin-right: 1.05rem;
+    
 }
 .galeria-imagenes .imagen .gifs {
     width: 15.6rem;
@@ -239,6 +237,30 @@ span.separacion {
     font-weight: 700;
     font-size: 1.3rem;
     color: #572EE5;
+}
+#gif-maximizado {
+    display: none;
+}
+.sin-resultados {
+    display: none;
+}
+.sin-resultados {
+    padding-top: 5rem;
+    margin-bottom: 14.9rem;
+    flex-direction: column;
+    align-items: center;
+}
+.sin-resultados img{
+    width: 15rem;
+    height: 15rem;
+    margin-bottom: 2.9rem;
+}
+.sin-resultados h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: #50E3C2;
+    line-height: 25px;
 }
 
 /*SECCION TRENDING-SLIDE*/
@@ -270,7 +292,7 @@ span.separacion {
     display: flex;
     flex-wrap: nowrap;
 }
-.galeria.trending {
+.galeria-trending {
     overflow: auto;
     display: flex;
     flex-wrap: nowrap;
@@ -289,7 +311,7 @@ span.separacion {
     width: 24.3rem;
     height: 18.7rem;
 }
-.primer-boton, .segundo-boton {
+.primer-boton-trend, .segundo-boton-trend {
     display: none;
 }
 .iconos, .info {
@@ -657,15 +679,9 @@ footer p:nth-last-child() {
         margin-bottom: 5.9rem;
         line-height: 3rem;
     }
-    .galeria-imagenes {
-        display: flex;
-        flex-flow: row wrap;
-        padding: 0 7.8rem 0 10.7rem;
-    }
     .galeria-imagenes .imagen {
         height: 20rem;
-        margin-bottom: 2.9rem;
-        margin-right: 2.9rem;
+        margin: 0 1.45rem 2.9rem 1.45rem;
         position: relative;  
     }
     .galeria-imagenes .imagen .gifs {
@@ -692,24 +708,7 @@ footer p:nth-last-child() {
         background-color: #572EE5;
         color: white;
     }
-    .sin-resultados {
-        padding-top: 5rem;
-        margin-bottom: 14.9rem;
-        flex-direction: column;
-        align-items: center;
-    }
-    .sin-resultados img{
-        width: 15rem;
-        height: 15rem;
-        margin-bottom: 2.9rem;
-    }
-    .sin-resultados h2 {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 700;
-        font-size: 2rem;
-        color: #50E3C2;
-        line-height: 25px;
-    }
+    
 
     /* FOOTER */ 
 
