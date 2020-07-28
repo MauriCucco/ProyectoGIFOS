@@ -243,10 +243,7 @@ function busqueda(string) {
     getGif("api.giphy.com/v1/gifs/search", string, apiKey, 12)
     .then( resp => {
 
-        for(u = 0; u < resp.data.length; u++) {
-
-            arrayResultados.push(resp.data[u]);
-        }
+        let linkDescarga = document.getElementsByClassName("descarga");
 
         if(resp.data.length == 0
             && input.value != "") {
@@ -270,6 +267,11 @@ function busqueda(string) {
             for(r = 0; r < resp.data.length; r++) {
 
                 crearTarjeta(resp.data[r].images.fixed_height_downsampled.url, resp.data[r].title, resp.data[r].username, ".galeria-imagenes");
+
+                arrayResultados.push(resp.data[r]);
+
+                linkDescarga[r + cont].setAttribute("href", arrayResultados[r + cont].images.original.url);
+                linkDescarga[r + cont].download = "descarga.gif";
         
             } 
 
@@ -589,29 +591,24 @@ async function trendingGifos() {
     const resp3 = await fetch(`http://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=12`);
     const trendGifos = await resp3.json();
 
+    let favoritosTrending = document.getElementsByClassName("favorito");
+    let linkDescarga = document.getElementsByClassName("descarga");
+
     for(v = 0; v < trendGifos.data.length; v++){
 
         crearTarjeta(trendGifos.data[v].images.fixed_height_downsampled.url, trendGifos.data[v].title, trendGifos.data[v].username, ".galeria-trending");
 
-    }
-
-    for(j = 0; j < trendGifos.data.length; j++) {
-
-        let favoritosTrending = document.getElementsByClassName("favorito");
-        let descargaTrending = document.getElementsByClassName("img-descarga");
-        let linkDescarga = document.getElementsByClassName("descarga");
-
-        arrayResultadosTrending.push(trendGifos.data[j]);
-
-        favoritosTrending[j].classList.add("trending"); //le agrego una clase para distinguirlos
-        descargaTrending[j].classList.add("trending"); //le agrego una clase para distinguirlos
-        linkDescarga[j].setAttribute("href", arrayResultadosTrending[j].bitly_gif_url);
-        linkDescarga[j].download = true;
-
+        arrayResultadosTrending.push(trendGifos.data[v]);
+        favoritosTrending[v].classList.add("trending"); //le agrego una clase para distinguirlos
+        linkDescarga[v].setAttribute("href", arrayResultadosTrending[v].images.original.url);
+        linkDescarga[v].download = "descarga.gif";
     }
 }
 
 trendingGifos();
+
+
+// SLIDE DE LA SECCIÓN ``TRENDING GIFOS´´
 
 let primerBoton = document.querySelector(".primer-boton-trend");
 let segundoBoton = document.querySelector(".segundo-boton-trend")
