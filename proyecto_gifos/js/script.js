@@ -102,16 +102,14 @@ document.addEventListener("click", event => {
             input.value = event.target.textContent;
             arrayResultados = []; //reseteo el array que guarda la info de los resultados
             galeria.innerHTML = ""; //limpio la sección
-            cerrarMax(); //cierro el gif maximizado
             borrarMaximizar(); //borro la clase activado de maximizar
             busqueda(input.value);
 
     }else if(event.target.getAttribute("src") == "images/icon-fav-active.svg") {
 
             event.target.setAttribute("src", "images/icon-fav-hover.svg");
-            borrarInfo(); //borra el gif de arrayFavoritos
             event.target.classList.remove("tildado");
-            guardarInfo() //guardo los que estén tildados
+            borrarInfo(); //borra el gif de arrayFavoritos
             localStorage.setItem("favoritos", arrayFavoritos);
                 
     }else if(event.target.getAttribute("src") == "images/icon-fav-hover.svg") {
@@ -138,7 +136,6 @@ input.addEventListener("keyup", event => {
             galeria.innerHTML = ""; //limpio la sección
             busqueda(input.value); //busco la palabra del input
             closeInputSearch();
-            cerrarMax(); //cierro el gif maximizado
             borrarMaximizar(); //borro la clase activado de maximizar
             cont = 0; //reseteo el contador del parámetro offset 
             arrayResultados = []; //reseteo el array que guarda la info de los resultados
@@ -233,7 +230,6 @@ imgSearch.addEventListener("click", event => {
         galeria.innerHTML = ""; //limpio la sección
         cont = 0; //reseteo el contador del parámetro offset 
         arrayResultados = []; //reseteo el array que guarda la info de los resultados
-        cerrarMax(); //cierro el gif maximizado
         borrarMaximizar(); //borro la clase activado de maximizar
         busqueda(input.value);
     }
@@ -392,30 +388,59 @@ botonMas.addEventListener("click", () => {
 
 // FUNCIÓN PARA GUARDAR LA INFO DEL GIF FAVORITO
 
+let posicionFavMax = [];
+let posicionFav = [];
+let posicionFavTrendMax = [];
+let posicionFavTrend = [];
+
 function guardarInfo() {
 
     let iconFavorito = document.getElementsByClassName("favorito");
 
     for(q = 0; q < iconFavorito.length; q++) {
 
-        if(iconFavorito[q].className == "favorito tildado") {
+        if(iconFavorito[q].className == "favorito tildado"
+           && seccionTrending.style.display == "none") {
 
-                arrayFavoritos.push(arrayResultados[q]);
-                iconFavorito[q].classList.add("guardado");
+            arrayFavoritos.push(arrayResultados[posicion]);
+            iconFavorito[q].classList.add("guardado");
+            posicionFavMax.push(posicion); //guardo la posicion del gif favorito maximizado
+            return;
 
-        }     
+        }else if(iconFavorito[q].className == "favorito tildado") {
+
+            arrayFavoritos.push(arrayResultados[q]);
+            iconFavorito[q].classList.add("guardado");
+            posicionFav.push(q); //guardo la posicion del gif favorito
+            return;
+        }   
+          
     }
     
     let iconFavoritoTrending = document.getElementsByClassName("favorito trending");
+    let iconFavoritoTrendingMax = document.getElementById("item3"); //icono favorito del gif maximizado
+
+    if(iconFavoritoTrendingMax != undefined) {
+
+        posicionFavTrendMax.push(posicionTrending); //guardo la posicion del gif favorito
+        posicionFavTrend.push(posicionTrending); //guardo la posicion del gif favorito
+        arrayFavoritos.push(arrayResultadosTrending[posicionTrending]); //guardo la info en el arrayFavoritos
+        return;
+    }
 
     for(t = 0; t < iconFavoritoTrending.length; t++) {
 
-        if(iconFavoritoTrending[t].className == "favorito trending tildado") {
+        if(iconFavoritoTrending[t].getAttribute("src") == "images/icon-fav-active.svg"
+           && iconFavoritoTrending[t].className != "favorito trending tildado guardado") {
 
-                arrayFavoritos.push(arrayResultadosTrending[t]);
-                iconFavoritoTrending[t].classList.add("guardado");
+            iconFavoritoTrending[t].classList.add("guardado") //para distinguirlo después
+            posicionFavTrend.push(t); //guardo la posicion del gif favorito
+            posicionFavTrendMax.push(t)  //guardo la posicion del gif favorito
+            arrayFavoritos.push(arrayResultadosTrending[t]);
+            return;
         }         
     }
+        
 }
 
 
@@ -426,29 +451,81 @@ function borrarInfo() {
     let iconFavorito = document.getElementsByClassName("favorito");
     let iconFavoritoTrending = document.getElementsByClassName("favorito trending");
 
-    for(g = 0; g < iconFavorito.length; ++g) {
+    for(g = 0; g < iconFavorito.length; g++) {
 
-        if(iconFavorito[g].className == "favorito tildado guardado") {
+        if(iconFavorito[g].className == "favorito tildado guardado"
+           && seccionTrending.style.display == "none") {
 
-            iconFavorito[g].classList.remove("guardado")
-        }         
+            iconFavorito[g].classList.remove("guardado");
+            //posicionFavMax.splice((posicionFav.indexOf(g)), 1); //borro la posicion
+            return;
+
+        }else if(iconFavorito[g].className == "favorito tildado guardado") {
+
+            iconFavorito[g].classList.remove("guardado");
+            posicionFav.splice((posicionFav.indexOf(g)), 1); //borro la posicion
+            //arrayFavoritos = []; //reseteo el array de favoritos
+            return;
+
+        }           
     }
 
-    for(e = 0; e < iconFavoritoTrending.length; ++e) {
+    let iconFavoritoTrendingMax = document.getElementById("item3"); //icono favorito del gif maximizado
 
-        if(iconFavoritoTrending[e].className == "favorito trending tildado guardado") {
+    if(iconFavoritoTrendingMax != undefined) {
 
-            iconFavoritoTrending[e].classList.remove("guardado")
-        }         
+        posicionFavTrendMax.splice((posicionFavTrendMax.indexOf(posicionTrending)), 1); //borro la posicion FavTrendMax
+        posicionFavTrend.splice((posicionFavTrend.indexOf(posicionTrending)), 1); //borro la posicion de FavTrend
+        let index;
+
+        for (i = 0; i < arrayFavoritos.length; i++) {
+                    
+            if(arrayFavoritos[i].id == arrayResultadosTrending[posicionTrending].id) {
+                
+                index = i;
+            }
+        } 
+        
+        arrayFavoritos.splice(index, 1); //borro el gif especifico del arrayFavoritos
+
+        return;
     }
 
-    arrayFavoritos = []
+    for(e = 0; e < arrayResultadosTrending.length; e++) {
+
+        console.log(iconFavoritoTrending);
+
+        if(iconFavoritoTrending[e].className == "favorito trending guardado") {
+
+            console.log("HOOOLAAAAA");
+            console.log(e);
+
+            iconFavoritoTrending[e].classList.remove("guardado");
+            
+            posicionFavTrendMax.splice(posicionFavTrendMax.indexOf(e), 1); //borro la posicion de FavTrendMax
+            posicionFavTrend.splice(posicionFavTrend.indexOf(e), 1); //borro la posicion de de FavTrend
+
+            let index2;
+
+            for (i = 0; i < arrayFavoritos.length; i++) {
+                        
+                if(arrayFavoritos[i].id == arrayResultadosTrending[e].id) {
+                    
+                    index2 = i;
+                }
+            } 
+            
+            arrayFavoritos.splice(index2, 1); //borro el gif especifico del arrayFavoritos
+            return;
+        }         
+    }
 }
+
 
 
 // FUNCIÓN PARA CREAR TARJETAS MAXIMIZADAS
 
-function crearTarjetaMaximizada(url, titulo, usuario, tipoImagen) {
+function crearTarjetaMaximizada(url, titulo, usuario, tipoImagen, tipoFavorito) {
 
     let galeriaImagenesMax = document.querySelector(".galeria");
 
@@ -468,7 +545,7 @@ function crearTarjetaMaximizada(url, titulo, usuario, tipoImagen) {
     tituloMax.id = "item2";
     linkDescargaMax.id = "favorito-max";
     imgFavorito.id = "item3";
-    imgFavorito.className = "favorito";
+    imgFavorito.className = tipoFavorito;
     imgDescarga.id = "item4";
 
     galeriaImagenesMax.appendChild(divImagenMax);
@@ -494,6 +571,7 @@ function crearTarjetaMaximizada(url, titulo, usuario, tipoImagen) {
 let posicion; //para saber la posicion del gif
 let posicionTrending; //para saber la posicion de los gi de la sección ``trending gifos´´
 let seccionTrending = document.getElementById("trending-slide");
+let seccionPresentacion = document.getElementById("presentacion");
 
 function maximizarGif() {
 
@@ -504,15 +582,17 @@ function maximizarGif() {
     
     seccionBusquedas.style.display = "none";
     seccionTrending.style.display = "none";
+    seccionPresentacion.style.display = "none";
     gifMax.style.display = "unset";
 
     for(l = 0; l < arrayResultados.length; l++) {
 
         if(iconMaximizar[l].className == "maximizar activado") {
 
-            crearTarjetaMaximizada(arrayResultados[l].images.fixed_height.url, arrayResultados[l].title, arrayResultados[l].username, "gifs-max");
+            crearTarjetaMaximizada(arrayResultados[l].images.fixed_height.url, arrayResultados[l].title, arrayResultados[l].username, "gifs-max", "favorito");
 
             posicion = l;
+
         }         
     }
     
@@ -520,11 +600,14 @@ function maximizarGif() {
 
         if(iconMaximizarTrending[u].className == "maximizar trending activado") {
 
-            crearTarjetaMaximizada(arrayResultadosTrending[u].images.fixed_height.url, arrayResultadosTrending[u].title, arrayResultadosTrending[u].username, "gifs-max-trending");
+            crearTarjetaMaximizada(arrayResultadosTrending[u].images.fixed_height.url, arrayResultadosTrending[u].title, arrayResultadosTrending[u].username, "gifs-max-trending", "favorito trending");
 
             posicionTrending = u;
         }         
     }
+
+    //mantenerActivadoTrend();
+ 
 }
 
 function cerrarMax() {
@@ -534,7 +617,6 @@ function cerrarMax() {
 
     gifMax.style.display = "none";
     galeriaImagenesMax.innerHTML = "";
-    seccionTrending.style.display = "unset";
     
 }
 
@@ -573,12 +655,14 @@ imgClose.addEventListener("click", event => {
     if (arrayResultados == 0) {
 
         seccionTrending.style.display = "unset";
+        seccionPresentacion.style.display = "unset";
         return;
     }
 
     seccionBusquedas.style.display = "unset";
     seccionTrending.style.display = "unset";
-
+    seccionPresentacion.style.display = "unset";
+    
 })
 
 
@@ -593,27 +677,28 @@ right.addEventListener("click", event => {
     let galeriaImagenesMax = document.getElementById("galeria-max");
     let imagenMaxBúsquedas = document.getElementsByClassName("gifs-max");
     let imagenMaxTrending = document.getElementsByClassName("gifs-max-trending");
-
-    console.log(imagenMaxTrending);
-    console.log(imagenMaxBúsquedas);
     
     if((posicion + contador) < cont
         && imagenMaxBúsquedas.length != 0) {
 
         galeriaImagenesMax.innerHTML = ""; //vacio primero el contenido
 
-        crearTarjetaMaximizada(arrayResultados[(posicion + contador)].images.fixed_height.url, arrayResultados[(posicion + contador)].title, arrayResultados[(posicion + contador)].username, "gifs-max");
+        crearTarjetaMaximizada(arrayResultados[(posicion + contador)].images.fixed_height.url, arrayResultados[(posicion + contador)].title, arrayResultados[(posicion + contador)].username, "gifs-max", "favorito");
 
         posicion = posicion + contador; //nueva posicion
+
+     
 
     }else if((posicionTrending + contador) < 12
               && imagenMaxTrending.length != 0) {
 
         galeriaImagenesMax.innerHTML = ""; //vacio primero el contenido
 
-        crearTarjetaMaximizada(arrayResultadosTrending[(posicionTrending + contador)].images.fixed_height.url, arrayResultadosTrending[(posicionTrending + contador)].title, arrayResultadosTrending[(posicionTrending + contador)].username, "gifs-max-trending");
+        crearTarjetaMaximizada(arrayResultadosTrending[(posicionTrending + contador)].images.fixed_height.url, arrayResultadosTrending[(posicionTrending + contador)].title, arrayResultadosTrending[(posicionTrending + contador)].username, "gifs-max-trending", "favorito trending");
 
         posicionTrending = posicionTrending + contador; //nueva posicion
+
+        //mantenerActivadoTrend();
     }
     
 })
@@ -624,25 +709,27 @@ left.addEventListener("click", () => {
     let imagenMaxBúsquedas = document.getElementsByClassName("gifs-max");
     let imagenMaxTrending = document.getElementsByClassName("gifs-max-trending");
 
-    console.log(imagenMaxBúsquedas);
-
     if((posicion - contador) >= 0
         && imagenMaxBúsquedas.length != 0) {
 
         galeriaImagenesMax.innerHTML = ""; //vacio primero el contenido
 
-        crearTarjetaMaximizada(arrayResultados[(posicion - contador)].images.fixed_height.url, arrayResultados[(posicion - contador)].title, arrayResultados[(posicion - contador)].username, "gifs-max");
+        crearTarjetaMaximizada(arrayResultados[(posicion - contador)].images.fixed_height.url, arrayResultados[(posicion - contador)].title, arrayResultados[(posicion - contador)].username, "gifs-max", "favorito");
 
         posicion = posicion - contador; //nueva posicion
+
+    
 
     }else if((posicionTrending - contador) >= 0
               && imagenMaxTrending.length != 0) {
 
         galeriaImagenesMax.innerHTML = ""; //vacio primero el contenido
 
-        crearTarjetaMaximizada(arrayResultadosTrending[(posicionTrending - contador)].images.fixed_height.url, arrayResultadosTrending[(posicionTrending - contador)].title, arrayResultadosTrending[(posicionTrending - contador)].username, "gifs-max-trending");
+        crearTarjetaMaximizada(arrayResultadosTrending[(posicionTrending - contador)].images.fixed_height.url, arrayResultadosTrending[(posicionTrending - contador)].title, arrayResultadosTrending[(posicionTrending - contador)].username, "gifs-max-trending", "favorito trending");
 
         posicionTrending = posicionTrending - contador; //nueva posicion
+
+        //mantenerActivadoTrend();
     }
     
 })
@@ -657,19 +744,23 @@ async function trendingGifos() {
     const resp3 = await fetch(`http://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=12`);
     const trendGifos = await resp3.json();
 
-    let favoritosTrending = document.getElementsByClassName("favorito");
-    let linkDescarga = document.getElementsByClassName("descarga");
-    let maximizarTrending = document.getElementsByClassName("maximizar");
-
     for(v = 0; v < trendGifos.data.length; v++){
 
         crearTarjeta(trendGifos.data[v].images.fixed_height_downsampled.url, trendGifos.data[v].title, trendGifos.data[v].username, ".galeria-trending");
 
         arrayResultadosTrending.push(trendGifos.data[v]);
-        favoritosTrending[v].classList.add("trending"); //le agrego una clase para distinguirlos
-        maximizarTrending[v].classList.add("trending"); //le agrego una clase para distinguirlos
-        linkDescarga[v].setAttribute("href", arrayResultadosTrending[v].images.original.url);
-        linkDescarga[v].download = "descarga.gif";
+    }
+
+    let favoritosTrending = document.getElementsByClassName("favorito");
+    let maximizarTrending = document.getElementsByClassName("maximizar");
+    let linkDescarga = document.getElementsByClassName("descarga");
+
+    for(w = 0; w < arrayResultadosTrending.length; w++) {
+
+        favoritosTrending[w].classList.add("trending"); //le agrego una clase para distinguirlos
+        maximizarTrending[w].classList.add("trending"); //le agrego una clase para distinguirlos
+        linkDescarga[w].setAttribute("href", arrayResultadosTrending[w].images.original.url);
+        linkDescarga[w].download = true;
     }
 }
 
@@ -708,6 +799,42 @@ document.addEventListener("keydown", () => {
 
     }
 })
+
+
+// FUNCIÓN PARA MANTENER EL FAVORITO ACTIVADO
+
+/*function mantenerActivadoTrend() {
+
+    if(posicionFavTrend.indexOf(posicionTrending) >= 0) {
+
+        let iconFavoritoTrending = document.querySelector("#item3.favorito.trending"); //tildo como favorito
+
+        iconFavoritoTrending.classList.add("tildado");
+        iconFavoritoTrending.classList.add("guardado");
+        iconFavoritoTrending.setAttribute("src", "images/icon-fav-active.svg");
+
+        if(posicionFavTrendMax.indexOf(posicionTrending) === -1) {
+
+            posicionFavTrendMax.push(posicionTrending); //guardo la posicion del gif favorito maximizado
+        }
+
+    }else if(posicionFavTrendMax.indexOf(posicionTrending) >= 0) {
+
+        let iconFavorito = document.getElementsByClassName("favorito trending");
+
+        iconFavorito[posicionTrending + 1].classList.add("tildado");
+        iconFavorito[posicionTrending + 1].classList.add("guardado");
+        iconFavorito[posicionTrending + 1].setAttribute("src", "images/icon-fav-active.svg");
+
+        if(posicionFavTrend.indexOf(posicionTrending) === -1) {
+
+            posicionFavTrend.push(posicionTrending); //guardo la posicion del gif favorito 
+        }
+
+    }
+}*/
+
+
 
 
 
