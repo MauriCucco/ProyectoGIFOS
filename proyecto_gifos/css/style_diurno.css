@@ -708,7 +708,7 @@ footer p:nth-last-child() {
         background-color: #572EE5;
         color: white;
     }
-    
+
 
     /* FOOTER */ 
 
@@ -838,7 +838,7 @@ footer p:nth-last-child() {
         text-align: left;
         text-transform: capitalize;
     }
-    #item3, #item4 {
+    #itemBusqueda, #itemTrending, #item4 {
         width: 1.92rem;
         height: 2.11rem;
         box-sizing: content-box;
@@ -848,10 +848,10 @@ footer p:nth-last-child() {
         opacity: 0.5;
         cursor: pointer;
     }
-    #item3:hover, #item4:hover {
+    #itemBusqueda:hover, #itemTrending:hover, #item4:hover {
         opacity: 1;
     }
-    #item3 {
+    #itemBusqueda, #itemTrending {
         grid-area: b;
     }
     #item4 {
