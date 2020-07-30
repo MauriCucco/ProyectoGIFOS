@@ -41,7 +41,7 @@ header nav {
     right: 0;
     background-color: rgba(87,46,229,0.90);
     height: 100%;
-    padding-top: 1.7rem;
+    padding-top: 1.7rem; 
     display: none;
 }
 .menuhamburguesa  ul li {
@@ -57,15 +57,6 @@ header nav {
     color: white;
     display: block;
     line-height: 6rem;
-}
-.menuhamburguesa ul li:nth-child(1) a::after {
-    content: "Modo Nocturno";
-}
-.menuhamburguesa ul li:nth-child(2) a::after {
-    content: "Favoritos";
-}
-.menuhamburguesa ul li:nth-child(3) a::after {
-    content: "Mis GIFOS";
 }
 span.line {
     width: 4.1rem;
@@ -238,9 +229,6 @@ span.separacion {
     font-size: 1.3rem;
     color: #572EE5;
 }
-#gif-maximizado {
-    display: none;
-}
 .sin-resultados {
     display: none;
 }
@@ -266,6 +254,7 @@ span.separacion {
 /*SECCION TRENDING-SLIDE*/
 
 #trending-slide {
+    display: block;
     background-color: rgb(243, 245, 248);
     padding-top: 4.6rem;
     padding-bottom: 8.2rem;
@@ -304,7 +293,7 @@ span.separacion {
 .imagen:nth-child(1) {
     margin-left: 0;
 }
-.imagen:last-child() {
+.imagen img:last-child() {
     margin-right: 0;
 }
 .gifs {
@@ -352,6 +341,93 @@ footer p:nth-last-child() {
     margin-right: 1.9rem;
 }
 
+/* SECCION GIF-MAX*/
+
+#gif-maximizado {
+    display: none;
+}
+#gif-maximizado a {
+    text-align: unset;
+}
+#div-max {
+    padding-top: 6.4rem;
+    border-top: 5px rgba(87, 46, 299, 0.5) solid;
+}
+.close-max {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 3.93rem;
+    margin-bottom: 7.8rem;
+}
+.close-max img {
+    width: 1.4rem;
+    height: 1.4rem;
+}
+#galeria-max {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+.imagen-max {
+    position: relative;
+    height: 24.5rem;
+}
+.gifs-max, .gifs-max-trending {
+    width: 31.8rem;
+    height: 24.5rem;
+}
+.primer-boton, .segundo-boton {
+    display: none
+}
+.grid-max {
+    display: grid;
+    grid-template-rows: 1.8rem 2.5rem;
+    grid-template-columns: 23.15rem 4.25rem 4.25rem;
+    grid-template-areas: "a b c"
+                         "d b c";
+    justify-content: center;
+    margin-top: 1.4rem;
+    margin-bottom: 12.6rem;
+}
+#item1 {
+    grid-area: a;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    text-align: left;
+    text-transform: capitalize;
+}
+#item2 {
+    grid-area: d;
+    align-self: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: left;
+    text-transform: capitalize;
+}
+#itemBusqueda, #itemTrending{
+    grid-area: b;
+    align-self: center;
+    width: 2rem;
+    height: 1.8rem;
+}
+#favorito-max {
+    justify-self: end;
+}
+#item4 {
+    grid-area: c;
+    width: 1.92rem;
+    height: 2.11rem;
+    box-sizing: content-box;
+    opacity: 0.5;
+    border: 1px solid #9CAFC3;
+    border-radius: 6px;
+    padding: 0.64rem 0.74rem;
+    position: relative;
+    top: 4px;
+}
+
+
 
 /* VERSIÓN DESKTOP*/
 
@@ -379,7 +455,7 @@ footer p:nth-last-child() {
         top: -23px;
         width: fit-content;
         background-color: inherit;
-        display: inline-block;
+        display: inline-block !important;
         padding-top: unset;
     }
     .menuhamburguesa .hamburguesa, #hamburguesa_checkbox {
@@ -411,14 +487,8 @@ footer p:nth-last-child() {
     .menuhamburguesa ul li:nth-child(3) {
         margin-right: 5.95rem;
     }
-    .menuhamburguesa ul li:nth-child(1) a::after {
-        content: "MODO NOCTURNO";
-    }
-    .menuhamburguesa ul li:nth-child(2) a::after {
-        content: "FAVORITOS";
-    }
-    .menuhamburguesa ul li:nth-child(3) a::after {
-        content: "MIS GIFOS";
+    .menuhamburguesa ul li a {
+        text-transform: uppercase;
     }
     span.line {
         display: none;
@@ -588,6 +658,9 @@ footer p:nth-last-child() {
         width: 35.7rem;
         height: 27.5rem;
     }
+    .gifs:last-child {
+        margin-right: 0;
+    }
     .imagen:hover .gifs {
         opacity: 0.6;
     }
@@ -650,6 +723,7 @@ footer p:nth-last-child() {
         bottom: 0;
         margin-bottom: 5.1rem;
         margin-left: 1.85rem;
+        margin-right: 1.85rem;
         z-index: 2;
     }
     .info p:first-child {
@@ -739,15 +813,10 @@ footer p:nth-last-child() {
 
     /* SECCION GIF-MAX*/
 
-    #gif-maximizado {
-        display: none;
-    }
-    #gif-maximizado a {
-        text-align: unset;
-    }
     #div-max {
-        padding-top: 3.32rem;
+        padding-top: 6.64rem;
         padding-bottom: 15.3rem;
+        border-top: none;
     }
     .close-max {
         display: flex;
@@ -759,6 +828,9 @@ footer p:nth-last-child() {
         width: 1.54rem;
         height: 1.54rem;
     }
+    #galeria-max {
+        display: unset;
+    }
     .slide-max {
         display: flex;
         flex-wrap: nowrap;
@@ -766,12 +838,6 @@ footer p:nth-last-child() {
         align-items: center;
         margin-left: auto;
         margin-right: auto;
-    }
-    .imagen-max:nth-child(1) {
-        margin-left: 0;
-    }
-    .imagen-max:last-child() {
-        margin-right: 0;
     }
     .imagen-max {
         position: relative;
@@ -821,22 +887,10 @@ footer p:nth-last-child() {
                             "d b c";
         justify-content: center;
         margin-top: 2.2rem;
+        margin-bottom: unset;
     }
-    #item1 {
-        grid-area: a;
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.5rem;
-        text-align: left;
-        text-transform: capitalize;
-    }
-    #item2 {
-        grid-area: d;
-        align-self: center;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 1.6rem;
-        font-weight: 700;
-        text-align: left;
-        text-transform: capitalize;
+    #favorito-max {
+        justify-self: unset;
     }
     #itemBusqueda, #itemTrending, #item4 {
         width: 1.92rem;

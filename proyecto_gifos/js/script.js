@@ -124,6 +124,24 @@ document.addEventListener("click", event => {
             event.target.classList.add("activado");
             maximizarGif();
 
+    }else if(event.target.className == "img-descarga") {
+
+        let url = event.target.parentNode.getAttribute("href");
+
+        var x=new XMLHttpRequest(); //PARA DESCARGAR EL GIF con la función download()
+        x.open("GET", url, true);
+        x.responseType = 'blob';
+        x.onload=function(e){download(x.response, "descarga.gif", "image/gif" ); }
+        x.send();
+
+    }else if(event.target.className == "gifs"
+             || event.target.className == "gifs trending") {
+
+        if (window.matchMedia("(max-width: 1200px)").matches) {
+
+            event.target.classList.add("activado");
+            maximizarGif();
+        } 
     }
 })
 
@@ -281,7 +299,7 @@ function busqueda(string) {
                 linkDescarga[r + cont].setAttribute("href", arrayResultados[r + cont].images.original.url);
                 linkDescarga[r + cont].download = "descarga.gif"; // uso + cont para que sume los nuevos gifs
         
-            } 
+            }
 
             if (resp.data.length == 12) { //display del botón ``ver más´´
 
@@ -467,42 +485,46 @@ function borrarInfo() {
 
     //SECCIÓN ``BÚSQUEDAS´´:    
 
-    let iconFavoritoMax = document.getElementById("itemBusqueda"); //icono favorito del gif maximizado
-    let iconFavorito = document.getElementsByClassName("favorito");
+    if(seccionBusquedas.style.display == "unset") {
 
-    if(iconFavoritoMax.className == "favorito guardado") {
+        let iconFavoritoMax = document.getElementById("itemBusqueda"); //icono favorito del gif maximizado
+        let iconFavorito = document.getElementsByClassName("favorito");
 
-            console.log("CHAUUUUUUUU");
-            
-            posicionFavMax.splice((posicionFavMax.indexOf(posicion)), 1); //borro la posicion de posicionFavMax
-            posicionFav.splice((posicionFav.indexOf(posicion)), 1); //borro la posicion de posicionFav
-            borrarItemFavoritos(arrayResultados, posicion);
+        if(iconFavoritoMax.className == "favorito guardado") {
 
-            iconFavorito[posicion].classList.remove("tildado"); //para borrar el gif de la sección ``Búsquedas´´ también
-            iconFavorito[posicion].classList.remove("guardado");
-            iconFavorito[posicion].setAttribute("src", "images/icon-fav-hover.svg");
+                console.log("CHAUUUUUUUU");
+                
+                posicionFavMax.splice((posicionFavMax.indexOf(posicion)), 1); //borro la posicion de posicionFavMax
+                posicionFav.splice((posicionFav.indexOf(posicion)), 1); //borro la posicion de posicionFav
+                borrarItemFavoritos(arrayResultados, posicion);
 
-            return;
+                iconFavorito[posicion].classList.remove("tildado"); //para borrar el gif de la sección ``Búsquedas´´ también
+                iconFavorito[posicion].classList.remove("guardado");
+                iconFavorito[posicion].setAttribute("src", "images/icon-fav-hover.svg");
 
-    }
+                return;
 
-    for(g = 0; g < iconFavorito.length; g++) {
+        }
 
-        if(iconFavorito[g].className == "favorito guardado") {
+        for(g = 0; g < iconFavorito.length; g++) {
 
-            iconFavorito[g].classList.remove("guardado");
-            posicionFav.splice((posicionFav.indexOf(g)), 1); //borro la posicion de posicionFav
-            posicionFavMax.splice((posicionFavMax.indexOf(g)), 1); //borro la posicion de posicionFavMax
-            borrarItemFavoritos(arrayResultados, g);
-            return;
+            if(iconFavorito[g].className == "favorito guardado") {
 
-        }           
+                iconFavorito[g].classList.remove("guardado");
+                posicionFav.splice((posicionFav.indexOf(g)), 1); //borro la posicion de posicionFav
+                posicionFavMax.splice((posicionFavMax.indexOf(g)), 1); //borro la posicion de posicionFavMax
+                borrarItemFavoritos(arrayResultados, g);
+                return;
+
+            }           
+        }
     }
 
     //SECCIÓN ``TRENDING GIFOS´´:
 
     let iconFavoritoTrendingMax = document.getElementById("itemTrending"); //icono favorito del gif maximizado
     let iconFavoritoTrending = document.getElementsByClassName("favorito trending");
+    let iconFavorito = document.getElementsByClassName("favorito");
     
     if(iconFavoritoTrendingMax != undefined) {
         
@@ -595,22 +617,29 @@ let posicion; //para saber la posicion del gif
 let posicionTrending; //para saber la posicion de los gi de la sección ``trending gifos´´
 let seccionTrending = document.getElementById("trending-slide");
 let seccionPresentacion = document.getElementById("presentacion");
+let header = document.getElementById("header")
+let footer = document.getElementById("footer");
 
 function maximizarGif() {
 
     let gifMax = document.getElementById("gif-maximizado");
     let iconMaximizar = document.getElementsByClassName("maximizar");
     let iconMaximizarTrending = document.getElementsByClassName("maximizar trending");
+    let imagenMax = document.getElementsByClassName("gifs");
+    let imagenMaxTrending = document.getElementsByClassName("gifs trending");
     
     
     seccionBusquedas.style.display = "none";
     seccionTrending.style.display = "none";
     seccionPresentacion.style.display = "none";
+    header.style.display = "none";
+    footer.style.display = "none";
     gifMax.style.display = "unset";
 
     for(l = 0; l < arrayResultados.length; l++) {
 
-        if(iconMaximizar[l].className == "maximizar activado") {
+        if(iconMaximizar[l].className == "maximizar activado"
+           || imagenMax[l].className == "gifs activado") {
 
             crearTarjetaMaximizada(arrayResultados[l].images.fixed_height.url, arrayResultados[l].title, arrayResultados[l].username, "gifs-max", "favorito", "itemBusqueda");
 
@@ -623,7 +652,8 @@ function maximizarGif() {
     
     for(u = 0; u < arrayResultadosTrending.length; u++) {
 
-        if(iconMaximizarTrending[u].className == "maximizar trending activado") {
+        if(iconMaximizarTrending[u].className == "maximizar trending activado"
+           || imagenMaxTrending[u].className == "gifs trending activado") {
 
             crearTarjetaMaximizada(arrayResultadosTrending[u].images.fixed_height.url, arrayResultadosTrending[u].title, arrayResultadosTrending[u].username, "gifs-max-trending", "favorito trending", "itemTrending");
 
@@ -645,26 +675,34 @@ function cerrarMax() {
     
 }
 
-// FUNCIÓN PARA CERRAR CON LA IMAGEN DE CLOSE Y SACAR LA CLASE "MAXIMIZAR ACTIVADO"
+// FUNCIÓN PARA CERRAR CON LA IMAGEN DE CLOSE Y SACAR LA CLASE "MAXIMIZAR ACTIVADO" o "GIFS ACTIVADO"
 
-let iconMaximizar = document.getElementsByClassName("maximizar");
-let iconMaximizarTrending = document.getElementsByClassName("maximizar trending");
+
 
 function borrarMaximizar() {
 
+    let iconMaximizar = document.getElementsByClassName("maximizar");
+    let iconMaximizarTrending = document.getElementsByClassName("maximizar trending");
+    let imagenMax = document.getElementsByClassName("gifs");
+    let imagenMaxTrending = document.getElementsByClassName("gifs trending");
+
     for(l = 0; l < arrayResultados.length; l++) {
 
-        if(iconMaximizar[l].className == "maximizar activado") {
+        if(iconMaximizar[l].className == "maximizar activado"
+           || imagenMax[l].className == "gifs activado") {
 
             iconMaximizar[l].classList.remove("activado");
+            imagenMax[l].classList.remove("activado");
         }         
     } 
 
     for(s = 0; s < arrayResultadosTrending.length; s++) {
 
-        if(iconMaximizarTrending[s].className == "maximizar trending activado") {
+        if(iconMaximizarTrending[s].className == "maximizar trending activado"
+           || imagenMaxTrending[s].className == "gifs trending activado") {
 
             iconMaximizarTrending[s].classList.remove("activado");
+            imagenMaxTrending[s].classList.remove("activado");
         }         
     }
 }
@@ -679,13 +717,17 @@ imgClose.addEventListener("click", event => {
 
     if (arrayResultados == 0) {
 
-        seccionTrending.style.display = "unset";
+        seccionTrending.style.display = "";
         seccionPresentacion.style.display = "unset";
+        header.style.display = "";
+        footer.style.display = "";
         return;
     }
 
     seccionBusquedas.style.display = "unset";
-    seccionTrending.style.display = "unset";
+    header.style.display = "";
+    footer.style.display = "";
+    seccionTrending.style.display = "";
     seccionPresentacion.style.display = "unset";
     
 })
@@ -779,13 +821,15 @@ async function trendingGifos() {
     let favoritosTrending = document.getElementsByClassName("favorito");
     let maximizarTrending = document.getElementsByClassName("maximizar");
     let linkDescarga = document.getElementsByClassName("descarga");
+    let imagenTrending = document.getElementsByClassName("gifs");
 
     for(w = 0; w < arrayResultadosTrending.length; w++) {
 
         favoritosTrending[w].classList.add("trending"); //le agrego una clase para distinguirlos
         maximizarTrending[w].classList.add("trending"); //le agrego una clase para distinguirlos
+        imagenTrending[w].classList.add("trending"); //le agrego una clase para distinguirlos
         linkDescarga[w].setAttribute("href", arrayResultadosTrending[w].images.original.url);
-        linkDescarga[w].download = true;
+        linkDescarga[w].download = "descarga.gif"
     }
 }
 
@@ -861,6 +905,118 @@ function mantenerActivadoBusquedas() {
 }
 
 
+// FUNCIÓN DOWNLOAD PARA BAJAR LOS GIFS
 
-
+function download(data, strFileName, strMimeType) {
+    var self = window, // this script is only for browsers anyway...
+        defaultMime = "application/octet-stream", // this default mime also triggers iframe downloads
+        mimeType = strMimeType || defaultMime,
+        payload = data,
+        url = !strFileName && !strMimeType && payload,
+        anchor = document.createElement("a"),
+        toString = function(a){return String(a);},
+        myBlob = (self.Blob || self.MozBlob || self.WebKitBlob || toString),
+        fileName = strFileName || "download",
+        blob,
+        reader;
+        myBlob= myBlob.call ? myBlob.bind(self) : Blob ;
+    if(String(this)==="true"){ //reverse arguments, allowing download.bind(true, "text/xml", "export.xml") to act as a callback
+        payload=[payload, mimeType];
+        mimeType=payload[0];
+        payload=payload[1];
+    }
+    if(url && url.length< 2048){ // if no filename and no mime, assume a url was passed as the only argument
+        fileName = url.split("/").pop().split("?")[0];
+        anchor.href = url; // assign href prop to temp anchor
+          if(anchor.href.indexOf(url) !== -1){ // if the browser determines that it's a potentially valid url path:
+            var ajax=new XMLHttpRequest();
+            ajax.open( "GET", url, true);
+            ajax.responseType = 'blob';
+            ajax.onload= function(e){ 
+              download(e.target.response, fileName, defaultMime);
+            };
+            setTimeout(function(){ ajax.send();}, 0); // allows setting custom ajax headers using the return:
+            return ajax;
+        } // end if valid url?
+    } // end if url?
+    //go ahead and download dataURLs right away
+    if(/^data\:[\w+\-]+\/[\w+\-]+[,;]/.test(payload)){
+        if(payload.length > (1024*1024*1.999) && myBlob !== toString ){
+            payload=dataUrlToBlob(payload);
+            mimeType=payload.type || defaultMime;
+        }else{			
+            return navigator.msSaveBlob ?  // IE10 can't do a[download], only Blobs:
+                navigator.msSaveBlob(dataUrlToBlob(payload), fileName) :
+                saver(payload) ; // everyone else can save dataURLs un-processed
+        }
+    }//end if dataURL passed?
+    blob = payload instanceof myBlob ?
+        payload :
+        new myBlob([payload], {type: mimeType}) ;
+    function dataUrlToBlob(strUrl) {
+        var parts= strUrl.split(/[:;,]/),
+        type= parts[1],
+        decoder= parts[2] == "base64" ? atob : decodeURIComponent,
+        binData= decoder( parts.pop() ),
+        mx= binData.length,
+        i= 0,
+        uiArr= new Uint8Array(mx);
+        for(i;i<mx;++i) uiArr[i]= binData.charCodeAt(i);
+        return new myBlob([uiArr], {type: type});
+     }
+    function saver(url, winMode){
+        if ('download' in anchor) { //html5 A[download]
+            anchor.href = url;
+            anchor.setAttribute("download", fileName);
+            anchor.className = "download-js-link";
+            anchor.innerHTML = "downloading...";
+            anchor.style.display = "none";
+            document.body.appendChild(anchor);
+            setTimeout(function() {
+                anchor.click();
+                document.body.removeChild(anchor);
+                if(winMode===true){setTimeout(function(){ self.URL.revokeObjectURL(anchor.href);}, 250 );}
+            }, 66);
+            return true;
+        }
+        // handle non-a[download] safari as best we can:
+        if(/(Version)\/(\d+)\.(\d+)(?:\.(\d+))?.*Safari\//.test(navigator.userAgent)) {
+            url=url.replace(/^data:([\w\/\-\+]+)/, defaultMime);
+            if(!window.open(url)){ // popup blocked, offer direct download:
+                if(confirm("Displaying New Document\n\nUse Save As... to download, then click back to return to this page.")){ location.href=url; }
+            }
+            return true;
+        }
+        //do iframe dataURL download (old ch+FF):
+        var f = document.createElement("iframe");
+        document.body.appendChild(f);
+        if(!winMode){ // force a mime that will download:
+            url="data:"+url.replace(/^data:([\w\/\-\+]+)/, defaultMime);
+        }
+        f.src=url;
+        setTimeout(function(){ document.body.removeChild(f); }, 333);
+    }//end saver
+    if (navigator.msSaveBlob) { // IE10+ : (has Blob, but not a[download] or URL)
+        return navigator.msSaveBlob(blob, fileName);
+    }
+    if(self.URL){ // simple fast and modern way using Blob and URL:
+        saver(self.URL.createObjectURL(blob), true);
+    }else{
+        // handle non-Blob()+non-URL browsers:
+        if(typeof blob === "string" || blob.constructor===toString ){
+            try{
+                return saver( "data:" +  mimeType   + ";base64,"  +  self.btoa(blob)  );
+            }catch(y){
+                return saver( "data:" +  mimeType   + "," + encodeURIComponent(blob)  );
+            }
+        }
+        // Blob but not URL support:
+        reader=new FileReader();
+        reader.onload=function(e){
+            saver(this.result);
+        };
+        reader.readAsDataURL(blob);
+    }
+    return true;
+}; /* end download() */
 

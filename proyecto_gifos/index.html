@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/style_diurno.css">
 </head>
 <body>
-    <header>
+    <header id="header">
         <a href="index.html">
             <svg class="mobile-logo" width="53px" height="49px" viewBox="0 0 53 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <!-- Generator: Sketch 63.1 (92452) - https://sketch.com -->
@@ -44,17 +44,17 @@
                 <span class="hamburguesa"></span>
                 <span class="hamburguesa"></span>
                 <span class="hamburguesa"></span>
-                <ul>
+                <ul class="menu">
                     <li>
-                        <a id="primero" href="index_nocturno.html"></a>
+                        <a id="primero" href="index_nocturno.html">Modo Nocturno</a>
                         <span class="line"></span>
                     </li>
                     <li>
-                        <a id="segundo" href="favoritos.html"></a>
+                        <a id="segundo" href="favoritos.html">Mis Favoritos</a>
                         <span class="line"></span>
                     </li>
                     <li>
-                        <a id="tercero" href="mis_gifos.html"></a>
+                        <a id="tercero" href="mis_gifos.html">Mis GIFOS</a>
                         <span class="line"></span>
                     </li>
                 </ul>
@@ -94,7 +94,9 @@
     </section>
     <section id="gif-maximizado">
         <div id="div-max">
-            <a class="close-max" href=""><img src="images/button-close.svg" alt="Ícono de cerrar"></a>
+            <div class="div-close">
+                <a class="close-max" href=""><img src="images/button-close.svg" alt="Ícono de cerrar"></a>
+            </div>
             <div class="slide-max">
                 <div class="primer-boton">
                     <i id="left" class="fas fa-chevron-left"></i>
@@ -122,7 +124,7 @@
             </div>
         </div>
     </section>
-    <footer>
+    <footer id="footer">
         <div class="redes">
             <p>Compartir en:</p>
             <a href="https://giphy.com/facebook"><i class="fab fa-facebook-f"></i></a>
@@ -133,5 +135,17 @@
     </footer>
     <script src="https://kit.fontawesome.com/a027afbbf3.js" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script>
+
+        $(document).ready(function() {
+
+            $("#hamburguesa_checkbox").click(function() {
+               
+                $(".menu").slideToggle(500);
+            })
+        })
+
+    </script> 
 </body>
 </html>
