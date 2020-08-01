@@ -9,6 +9,7 @@ let img = document.getElementsByClassName("list-img");
 let imgSearch = document.querySelector(".search-icon");
 let search = document.querySelector(".search");
 let containerBuscar = document.querySelector(".container-buscar");
+let body = document.getElementById("body");
 
 function inputSearch() {
 
@@ -29,7 +30,15 @@ function inputSearch() {
             p[i].classList.remove("list-p-activo"); 
         }
         search.classList.remove("search-activo");
-        imgSearch.setAttribute("src", "images/icon-search.svg");
+        if(body.style.backgroundColor == "rgb(55, 56, 60)") { //modo nocturno
+
+            imgSearch.setAttribute("src", "images/icon-search-mod-noc.svg");
+
+        }else {
+
+            imgSearch.setAttribute("src", "images/icon-search.svg");
+
+        }
         imgSearch.classList.remove("img-close");
         imgSearch.classList.add("search-icon");
     
@@ -48,7 +57,15 @@ function inputSearch() {
             p[i].classList.add("list-p-activo"); 
         }
         search.classList.add("search-activo");
-        imgSearch.setAttribute("src", "images/close.svg"); //cambio el icono de búsqueda
+        if(body.style.backgroundColor == "rgb(55, 56, 60)") { //modo nocturno
+
+            imgSearch.setAttribute("src", "images/close-noc.svg");
+
+        }else {
+
+            imgSearch.setAttribute("src", "images/close.svg"); //cambio el icono de búsqueda
+
+        }
         imgSearch.classList.remove("search-icon");
         imgSearch.classList.add("img-close");
 
@@ -72,7 +89,15 @@ function closeInputSearch () {
         p[i].classList.remove("list-p-activo"); 
     }
     search.classList.remove("search-activo");
-    imgSearch.setAttribute("src", "images/icon-search.svg");
+    if(body.style.backgroundColor == "rgb(55, 56, 60)") { //modo nocturno
+
+        imgSearch.setAttribute("src", "images/icon-search-mod-noc.svg");
+
+    }else {
+
+        imgSearch.setAttribute("src", "images/icon-search.svg");
+
+    }
     imgSearch.classList.remove("img-close");
     imgSearch.classList.add("search-icon");
 
@@ -105,16 +130,34 @@ document.addEventListener("click", event => {
             borrarMaximizar(); //borro la clase activado de maximizar
             busqueda(input.value);
 
-    }else if(event.target.getAttribute("src") == "images/icon-fav-active.svg") {
+    }else if(event.target.getAttribute("src") == "images/icon-fav-active.svg"
+             || event.target.getAttribute("src") == "images/icon-fav-active-noc.svg") {
+            
+            if(event.target.getAttribute("src") == "images/icon-fav-active.svg") {
 
-            event.target.setAttribute("src", "images/icon-fav-hover.svg");
+                event.target.setAttribute("src", "images/icon-fav-hover.svg");
+    
+            }else if(event.target.getAttribute("src") == "images/icon-fav-active-noc.svg") {
+    
+                event.target.setAttribute("src", "images/icon-fav-hover-noc.svg");
+            }
+            
             event.target.classList.remove("tildado");
             borrarInfo(); //borra el gif de arrayFavoritos
             localStorage.setItem("favoritos", arrayFavoritos);
                 
-    }else if(event.target.getAttribute("src") == "images/icon-fav-hover.svg") {
+    }else if(event.target.getAttribute("src") == "images/icon-fav-hover.svg"
+             || event.target.getAttribute("src") == "images/icon-fav-hover-noc.svg") {
+            
+            if(event.target.getAttribute("src") == "images/icon-fav-hover.svg") {
 
-            event.target.setAttribute("src", "images/icon-fav-active.svg");
+                event.target.setAttribute("src", "images/icon-fav-active.svg");
+
+            }else if(event.target.getAttribute("src") == "images/icon-fav-hover-noc.svg") {
+
+                event.target.setAttribute("src", "images/icon-fav-active-noc.svg");
+            }
+            
             event.target.classList.add("tildado");
             guardarInfo(); //guarda la info del gif en el arrayFavoritos
             localStorage.setItem("favoritos", arrayFavoritos);
@@ -213,11 +256,19 @@ function crearSugerencia(string) {
 
     let nuevoLi = document.createElement("li");
     let nuevoImg = document.createElement("img");
-    nuevoImg.setAttribute("src", "images/icon-search.svg");
+    if(body.style.backgroundColor == "rgb(55, 56, 60)") {
+
+        nuevoImg.setAttribute("src", "images/icon-search-mod-noc.svg");
+
+    }else {
+
+        nuevoImg.setAttribute("src", "images/icon-search.svg");
+
+    }
+    
     nuevoImg.setAttribute("alt", "Ícono de búsqueda")
     let nuevoP = document.createElement('p');
     nuevoP.textContent = string; //recibe la sugerencia
-
     lista.appendChild(nuevoLi);
     nuevoLi.className = "li-sugerencias";
     nuevoLi.appendChild(nuevoImg);
@@ -234,6 +285,7 @@ function crearSugerencia(string) {
 imgSearch.addEventListener("click", event => {
 
     if(imgSearch.getAttribute("src") == "images/close.svg"
+       || imgSearch.getAttribute("src") == "images/close-noc.svg"
        || input.value == "") {
 
         lista.innerHTML = "";
@@ -413,24 +465,24 @@ let posicionFavTrend = [];
 
 function guardarInfo() {
 
-    //SECCIÓN ``BÚSQUEDAS´´:
+//SECCIÓN ``BÚSQUEDAS´´:
 
-    let iconFavorito = document.getElementsByClassName("favorito");
-    let iconFavoritoMax = document.querySelector("itemBusqueda");
+let iconFavorito = document.getElementsByClassName("favorito");
+let iconFavoritoMax = document.querySelector("itemBusqueda");
 
     if(iconFavoritoMax != undefined) {
 
-            arrayFavoritos.push(arrayResultados[posicion]);
-            posicionFavMax.push(posicion); //guardo la posicion del gif favorito maximizado
-            posicionFav.push(posicion); //guardo la posicion del gif favorito
+        arrayFavoritos.push(arrayResultados[posicion]);
+        posicionFavMax.push(posicion); //guardo la posicion del gif favorito maximizado
+        posicionFav.push(posicion); //guardo la posicion del gif favorito
 
-            iconFavorito[posicion + 1].classList.add("tildado"); //para activar el gif de la sección ``Búsquedas´´ también
-            iconFavorito[posicion + 1].classList.add("guardado");
-            iconFavorito[posicion + 1].setAttribute("src", "images/icon-fav-active.svg");
+        iconFavorito[posicion + 1].classList.add("tildado"); //para activar el gif de la sección ``Búsquedas´´ también
+        iconFavorito[posicion + 1].classList.add("guardado");
+        iconFavorito[posicion + 1].setAttribute("src", "images/icon-fav-active.svg");
 
-            return;
+        return;
 
-        }
+    }
 
     for(q = 0; q < iconFavorito.length; q++) {
 
@@ -445,10 +497,10 @@ function guardarInfo() {
           
     }
     
-    //SECCIÓN ``TRENDING GIFOS´´:
+//SECCIÓN ``TRENDING GIFOS´´:
 
-    let iconFavoritoTrending = document.getElementsByClassName("favorito trending");
-    let iconFavoritoTrendingMax = document.querySelector("#itemTrending"); //icono favorito del gif maximizado
+let iconFavoritoTrending = document.getElementsByClassName("favorito trending");
+let iconFavoritoTrendingMax = document.querySelector("#itemTrending"); //icono favorito del gif maximizado
 
     if(iconFavoritoTrendingMax != undefined) {
 
@@ -601,12 +653,22 @@ function crearTarjetaMaximizada(url, titulo, usuario, tipoImagen, tipoFavorito, 
     divGridMax.appendChild(tituloMax);
     divGridMax.appendChild(linkDescargaMax);
     divGridMax.appendChild(imgFavorito);
-    imgFavorito.setAttribute("src", "images/icon-fav-hover.svg");
     linkDescargaMax.appendChild(imgDescarga);
-    imgDescarga.setAttribute("src", "images/icon-download.svg");
     
     usuarioMax.textContent = usuario;
     tituloMax.textContent = titulo;
+
+    if(body.style.backgroundColor == "rgb(55, 56, 60)") { //modo nocturno
+
+        tituloMax.style.color = "white";
+        imgFavorito.setAttribute("src", "images/icon-fav-hover-noc.svg");
+        imgDescarga.setAttribute("src", "images/icon-download-noc.svg");
+
+    }else {
+
+        imgFavorito.setAttribute("src", "images/icon-fav-hover.svg");
+        imgDescarga.setAttribute("src", "images/icon-download.svg");
+    }
     
 }
 
@@ -1019,4 +1081,3 @@ function download(data, strFileName, strMimeType) {
     }
     return true;
 }; /* end download() */
-

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head id="head">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GIFOS</title>
@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style_diurno.css">
 </head>
-<body>
+<body id="body">
     <header id="header">
         <a href="index.html">
             <svg class="mobile-logo" width="53px" height="49px" viewBox="0 0 53 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -46,15 +46,15 @@
                 <span class="hamburguesa"></span>
                 <ul class="menu">
                     <li>
-                        <a id="primero" href="index_nocturno.html">Modo Nocturno</a>
+                        <a id="primero" class="lista" href="#">Modo Nocturno</a>
                         <span class="line"></span>
                     </li>
                     <li>
-                        <a id="segundo" href="favoritos.html">Mis Favoritos</a>
+                        <a id="segundo" class="lista" href="favoritos.html">Mis Favoritos</a>
                         <span class="line"></span>
                     </li>
                     <li>
-                        <a id="tercero" href="mis_gifos.html">Mis GIFOS</a>
+                        <a id="tercero" class="lista" href="mis_gifos.html">Mis GIFOS</a>
                         <span class="line"></span>
                     </li>
                 </ul>
@@ -95,7 +95,7 @@
     <section id="gif-maximizado">
         <div id="div-max">
             <div class="div-close">
-                <a class="close-max" href=""><img src="images/button-close.svg" alt="Ícono de cerrar"></a>
+                <a class="close-max" href=""><img class="close" src="images/button-close.svg" alt="Ícono de cerrar"></a>
             </div>
             <div class="slide-max">
                 <div class="primer-boton">
@@ -109,18 +109,18 @@
         </div>
     </section>    
     <section id="trending-slide">
-        <h2>Trending GIFOS</h2>
+        <h2 class="h2">Trending GIFOS</h2>
         <div class="parrafo">
             <p>Mira los últimos</p> 
             <p>GIFOS de nuestra comunidad.</p>
         </div>
         <div class="slide">
             <div class="primer-boton-trend">
-                <i id="left" class="fas fa-chevron-left"></i>
+                <i id="left-trend" class="fas fa-chevron-left"></i>
             </div>
             <div class="galeria-trending"></div>
             <div class="segundo-boton-trend">
-                <i id="right" class="fas fa-chevron-right"></i>
+                <i id="right-trend" class="fas fa-chevron-right"></i>
             </div>
         </div>
     </section>
@@ -135,17 +135,6 @@
     </footer>
     <script src="https://kit.fontawesome.com/a027afbbf3.js" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
-    <script src="js/jquery-3.5.1.min.js"></script>
-    <script>
-
-        $(document).ready(function() {
-
-            $("#hamburguesa_checkbox").click(function() {
-               
-                $(".menu").slideToggle(500);
-            })
-        })
-
-    </script> 
+    <script src="js/script_nocturno.js"></script> 
 </body>
 </html>

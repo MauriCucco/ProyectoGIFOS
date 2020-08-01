@@ -178,6 +178,7 @@ span.hamburguesa {
     text-transform: capitalize;
     line-height: 2.5rem;
     color: #572EE5;
+    text-align: center;
 }
 
 /*SECCION BUSQUEDAS*/
@@ -263,10 +264,10 @@ span.separacion {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 2rem;
-    color: #572EE5;
     text-align: center;
     line-height: 3rem;
     margin-bottom: 0.7rem;
+    color: #572EE5;
 }
 .parrafo {
     margin-bottom: 3.2rem;
@@ -333,9 +334,6 @@ footer p:nth-last-child() {
     color: rgb(205, 214, 224);
     font-size: 2rem;
 }
-.redes i:hover {
-    color: #572EE5;
-}
 .redes a:nth-of-type(2) {
     margin-left: 1.9rem;
     margin-right: 1.9rem;
@@ -381,7 +379,7 @@ footer p:nth-last-child() {
 }
 .grid-max {
     display: grid;
-    grid-template-rows: 1.8rem 2.5rem;
+    grid-template-rows: 1.8rem 4rem;
     grid-template-columns: 23.15rem 4.25rem 4.25rem;
     grid-template-areas: "a b c"
                          "d b c";
@@ -398,7 +396,7 @@ footer p:nth-last-child() {
 }
 #item2 {
     grid-area: d;
-    align-self: center;
+    align-self: start;
     font-family: 'Montserrat', sans-serif;
     font-size: 1.6rem;
     font-weight: 700;
@@ -408,8 +406,14 @@ footer p:nth-last-child() {
 #itemBusqueda, #itemTrending{
     grid-area: b;
     align-self: center;
+    justify-self: center;
     width: 2rem;
     height: 1.8rem;
+}
+#itemBusqueda, #itemTrending {
+    position: relative;
+    bottom: 0.8rem;
+    border-color: none;
 }
 #favorito-max {
     justify-self: end;
@@ -424,7 +428,7 @@ footer p:nth-last-child() {
     border-radius: 6px;
     padding: 0.64rem 0.74rem;
     position: relative;
-    top: 4px;
+    top: 0.4rem;
 }
 
 
@@ -438,9 +442,9 @@ footer p:nth-last-child() {
     header {
         height: 9rem;
         width: 100%;
-        background-color: white;
         padding: 1.8rem 15.6rem 1.29rem 15.6rem;
         z-index: 2;
+        background-color: white;
     }
     .mobile-logo {
         width: 5.91rem;
@@ -455,7 +459,7 @@ footer p:nth-last-child() {
         top: -23px;
         width: fit-content;
         background-color: inherit;
-        display: inline-block !important;
+        display: inline-block;
         padding-top: unset;
     }
     .menuhamburguesa .hamburguesa, #hamburguesa_checkbox {
@@ -676,7 +680,7 @@ footer p:nth-last-child() {
     .primer-boton-trend:hover, .segundo-boton-trend:hover {
         background-color: #572EE5;
     }
-    .primer-boton-trend:hover i#left, .segundo-boton-trend:hover i#right {
+    .primer-boton-trend:hover i#left-trend, .segundo-boton-trend:hover i#right-trend {
         color: white;
     }
     .primer-boton-trend {
@@ -685,11 +689,11 @@ footer p:nth-last-child() {
     .segundo-boton-trend {
         margin-left: 2.2rem;
     }
-    #right, #left {
+    #right-trend, #left-trend {
         color: #572EE5;
         font-size: 1.7rem;
     }
-    #left {
+    #left-trend {
         position: relative;
         right: 0.3rem;
     }
@@ -809,7 +813,9 @@ footer p:nth-last-child() {
     .redes i {
         font-size: 1.8rem
     }
-
+    .redes i:hover {
+        color: #572EE5;
+    }
 
     /* SECCION GIF-MAX*/
 
@@ -907,8 +913,11 @@ footer p:nth-last-child() {
     }
     #itemBusqueda, #itemTrending {
         grid-area: b;
+        justify-self: unset;
+        bottom: unset;
     }
     #item4 {
         grid-area: c;
+        top: 0.6rem;
     }
 }
