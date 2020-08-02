@@ -2,7 +2,7 @@
 
 document.addEventListener("click", event => {
 
-    if (window.matchMedia("(max-width: 1200px)").matches) {
+    if (window.matchMedia("(max-width: 1199px)").matches) {
 
         let menuHamburguesa = document.querySelector(".menu");
 

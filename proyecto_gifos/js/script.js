@@ -128,6 +128,7 @@ document.addEventListener("click", event => {
             arrayResultados = []; //reseteo el array que guarda la info de los resultados
             galeria.innerHTML = ""; //limpio la sección
             busqueda(input.value);
+            setTimeout(function() {activarHistorial()}, 1000); //tildo los favoritos del historial
 
     }else if(event.target.getAttribute("src") == "images/icon-fav-active.svg"
              || event.target.getAttribute("src") == "images/icon-fav-active-noc.svg") {
@@ -197,7 +198,7 @@ document.addEventListener("click", event => {
     }else if(event.target.className == "gifs"
              || event.target.className == "gifs trending") {
 
-        if (window.matchMedia("(max-width: 1200px)").matches) {
+        if (window.matchMedia("(max-width: 1199px)").matches) {
 
             event.target.classList.add("activado");
             maximizarGif();
@@ -214,6 +215,7 @@ input.addEventListener("keyup", event => {
             galeria.innerHTML = ""; //limpio la sección
             busqueda(input.value); //busco la palabra del input
             closeInputSearch();
+            setTimeout(function() {activarHistorial()}, 1000); //tildo los favoritos del historial
             cont = 0; //reseteo el contador del parámetro offset 
             arrayResultados = []; //reseteo el array que guarda la info de los resultados
             return;
@@ -317,6 +319,7 @@ imgSearch.addEventListener("click", event => {
         cont = 0; //reseteo el contador del parámetro offset 
         arrayResultados = []; //reseteo el array que guarda la info de los resultados
         busqueda(input.value);
+        setTimeout(function() {activarHistorial()}, 1000); //tildo los favoritos del historial
     }
 });
 
@@ -468,6 +471,7 @@ function crearTarjeta(url, titulo, usuario, tipoGaleria, tipoMaximizar) {
 botonMas.addEventListener("click", () => {
 
     busqueda(`${tituloBusqueda.textContent}&offset=${cont}`);
+    setTimeout(function() {activarHistorial()}, 1000); //tildo los favoritos del historial
 })
 
 
@@ -1196,3 +1200,102 @@ function download(data, strFileName, strMimeType) {
     }
     return true;
 }; /* end download() */
+
+
+
+// FUNCIONES PARA ACTIVAR FAVORITOS ELEGIDOS AL REINICIAR LA PÁGINA
+
+let historial = localStorage.getItem("favoritos");
+let arrayHistorial = JSON.parse(historial);
+
+// SECCIÓN ``TRENDING GIFOS´´
+
+let posicionesHistorialTrending = []; // posiciones donde están los favoritos en ``Trending GIFOS´´
+let idResultadosTrending = []; //los id del arrayResultadosTrending
+
+setTimeout(function() { //le doy un tiempo para que cargue bien el arrayResultadosTrending
+
+    for(z = 0; z < arrayResultadosTrending.length; z++) {
+
+        idResultadosTrending.push(arrayResultadosTrending[z].id); //guardo los id de arrayResultadosTrending
+
+    }
+
+    if(arrayHistorial != null) {
+
+        for(w = 0; w < arrayHistorial.length; w++){
+
+            let loTiene = idResultadosTrending.findIndex(function(obj) {
+
+                    return obj == arrayHistorial[w].id;
+                
+            })
+
+            posicionesHistorialTrending.push(loTiene); //guardo las posiciones de los favoritos
+        }
+    }
+    
+    
+    let iconFavoritoTrending = document.getElementsByClassName("favorito trending");
+
+    for(k = 0; k < posicionesHistorialTrending.length; k++) { //uso las posiciones que guardé
+
+        if(posicionesHistorialTrending[k] != -1) {
+
+            iconFavoritoTrending[posicionesHistorialTrending[k]].classList.add("tildado"); 
+            iconFavoritoTrending[posicionesHistorialTrending[k]].classList.add("guardado");
+            iconFavoritoTrending[posicionesHistorialTrending[k]].setAttribute("src", "images/icon-fav-active.svg");
+            posicionFavTrend.push(posicionesHistorialTrending[k]); //guardo la posicion del gif favorito
+            posicionFavTrendMax.push(posicionesHistorialTrending[k])  //guardo la posicion del gif favorito para usarlo cuando sea maximizado
+            arrayFavoritos.push(arrayResultadosTrending[posicionesHistorialTrending[k]]); //guardo el gif en arrayFavoritos
+        }
+        
+    }
+
+}, 1000);
+
+//SECCIÓN ``BÚSQUEDAS´´
+
+let posicionesHistorialBusquedas = []; // posiciones donde están los favoritos en ``Búsquedas´´
+let idResultados = []; //los id del arrayResultados
+
+function activarHistorial() {
+
+    for(z = 0; z < arrayResultados.length; z++) {
+
+        idResultados.push(arrayResultados[z].id); //guardo los id de arrayResultadosTrending
+
+    }
+
+    if(arrayHistorial != null) {
+
+       for(w = 0; w < arrayHistorial.length; w++){
+
+            let loTiene = idResultados.findIndex(function(obj) {
+
+                    return obj == arrayHistorial[w].id;
+                
+            })
+
+            posicionesHistorialBusquedas.push(loTiene); //guardo las posiciones de los favoritos
+        } 
+    }
+
+    let iconFavorito = document.getElementsByClassName("favorito");
+
+    for(k = 0; k < posicionesHistorialBusquedas.length; k++) { //uso las posiciones que guardé
+
+        if(posicionesHistorialBusquedas[k] != -1) {
+
+            iconFavorito[posicionesHistorialBusquedas[k]].classList.add("tildado"); 
+            iconFavorito[posicionesHistorialBusquedas[k]].classList.add("guardado");
+            iconFavorito[posicionesHistorialBusquedas[k]].setAttribute("src", "images/icon-fav-active.svg");
+            posicionFav.push(posicionesHistorialBusquedas[k]); //guardo la posicion del gif favorito
+            posicionFavMax.push(posicionesHistorialBusquedas[k])  //guardo la posicion del gif favorito para usarlo cuando sea maximizado
+            arrayFavoritos.push(arrayResultados[posicionesHistorialBusquedas[k]]); //guardo el gif en arrayFavoritos
+        }
+        
+    }
+
+}
+
