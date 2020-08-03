@@ -37,6 +37,7 @@ function favoritos(array) {
 
         let linkDescarga = document.getElementsByClassName("descarga");
         let iconSeccionFavoritos = document.getElementsByClassName("favorito");
+        let titulosGifo = document.getElementsByClassName("titulo-gifo");
 
         for(r = 0; r < array.length; r++) {
 
@@ -48,8 +49,11 @@ function favoritos(array) {
             iconSeccionFavoritos[r + cont].classList.add("seccion");
             iconSeccionFavoritos[r + cont].classList.add("tildado"); //para que ya queden tildados
             iconSeccionFavoritos[r + cont].classList.add("guardado");
-            iconSeccionFavoritos[r + cont].setAttribute("src", "images/icon-fav-seccion.svg"); //harcodeo imagen estable
 
+            iconSeccionFavoritos[r + cont].setAttribute("src", "images/icon-fav-active.svg");
+
+            titulosGifo[r + cont].classList.add("seccion");
+            
             verMasFavoritos.style.display = "none";
     
         }
@@ -60,6 +64,7 @@ function favoritos(array) {
 
         let linkDescarga = document.getElementsByClassName("descarga");
         let iconSeccionFavoritos = document.getElementsByClassName("favorito");
+        let titulosGifo = document.getElementsByClassName("titulo-gifo");
 
         for(r = 0; r < 12; r++) {
 
@@ -71,7 +76,10 @@ function favoritos(array) {
             iconSeccionFavoritos[r + cont].classList.add("seccion");
             iconSeccionFavoritos[r + cont].classList.add("tildado"); //para que ya queden tildados
             iconSeccionFavoritos[r + cont].classList.add("guardado");
-            iconSeccionFavoritos[r + cont].setAttribute("src", "images/icon-fav-seccion.svg"); //harcodeo imagen estable
+
+            titulosGifo[r + cont].classList.add("seccion");
+        
+            iconSeccionFavoritos[r + cont].setAttribute("src", "images/icon-fav-active.svg");
 
             verMasFavoritos.style.display = "block"; 
         }
@@ -89,6 +97,7 @@ verMasFavoritos.addEventListener("click", () => {
 
         let linkDescarga = document.getElementsByClassName("descarga");
         let iconSeccionFavoritos = document.getElementsByClassName("favorito");
+        let titulosGifo = document.getElementsByClassName("titulo-gifo");
         let vueltas;
 
         for(r = contFav; r < arraySeccionFavoritos.length; r++) {
@@ -101,8 +110,11 @@ verMasFavoritos.addEventListener("click", () => {
             iconSeccionFavoritos[r + cont].classList.add("seccion");
             iconSeccionFavoritos[r + cont].classList.add("tildado"); //para que ya queden tildados
             iconSeccionFavoritos[r + cont].classList.add("guardado");
-            iconSeccionFavoritos[r + cont].setAttribute("src", "images/icon-fav-seccion.svg"); //harcodeo imagen estable
 
+            titulosGifo[r + cont].classList.add("seccion");
+
+            iconSeccionFavoritos[r + cont].setAttribute("src", "images/icon-fav-active.svg");
+            
             vueltas = r;
     
         }
@@ -117,26 +129,27 @@ verMasFavoritos.addEventListener("click", () => {
 })
 
 
-// FUNCIÓN PARA BORRAR GIF DE FAVORITOS (Y DE OTRAS SECCIONES) ------> ANULADA POR CUESTIÓN DE TIEMPO
+// FUNCIÓN PARA BORRAR GIF DE FAVORITOS (Y DE OTRAS SECCIONES) 
 
-/*let indexFavoritoTrending;
+let indexFavoritoTrending;
 let indexFavorito;
 let idSeccionFavorito; //para saber la posicion del gif favorito borrado
 
-function borrarFavorito() {
+function borrarFavoritoSeccion() {
 
     let iconSeccionFavoritos = document.getElementsByClassName("favorito seccion");
+    let indice;
 
     for(d = 0; d < iconSeccionFavoritos.length; d++) {
 
         if(iconSeccionFavoritos[d].className == "favorito seccion guardado") {
  
                 iconSeccionFavoritos[d].classList.remove("guardado");
-                posicionFavorito = d;
+                indice = d;
         }
     }
 
-    idSeccionFavorito = arraySeccionFavoritos[posicionFavorito].id;
+    idSeccionFavorito = arraySeccionFavoritos[indice].id;
 
     let indexBorrar;
 
@@ -195,12 +208,60 @@ function borrarFavorito() {
         posicionFav.splice((posicionFav.indexOf(posicion)), 1); //borro la posicion de posicionFav
         posicionFavMax.splice((posicionFavMax.indexOf(posicion)), 1); //borro la posicion de posicionFavMax
     }
-}*/
+}
+
+
+
+//FUNCIÓN PARA GUARDAR GIF FAVORITO EN FAVORITOS (Y EN OTRAS SECCIONES)
+
+
+let posicionFavSeccion; //posicion del gif favorito en ``Favoritos´´ tamaño chico
+
+function guardarFavoritoSeccion() {
+
+    let iconSeccionFavoritos = document.getElementsByClassName("favorito seccion");
+
+    for(d = 0; d < iconSeccionFavoritos.length; d++) {
+
+        if(iconSeccionFavoritos[d].className == "favorito seccion tildado") {
+ 
+            iconSeccionFavoritos[d].classList.add("guardado");
+            arrayFavoritos.push(arraySeccionFavoritos[d]);
+            posicionFavSeccion = d; 
+        }
+    }
+
+    idSeccionFavorito = arraySeccionFavoritos[posicionFavSeccion].id;
+
+    //encuentro la posicion del gif borrado en ``Trending GIFOS´´ (``Búsquedas´´ no hace falta)
+
+    let iconFavoritoTrending = document.getElementsByClassName("favorito trending"); //TRENDING GIFOS
+
+    for (h = 0; h < arrayResultadosTrending.length; h++) {
+                        
+        if(arrayResultadosTrending[h].id == idSeccionFavorito) {
+                    
+            indexFavoritoTrending = h;
+        }
+    }
+
+    //uso la posicion para guardarlo en su seccion
+
+    if(indexFavoritoTrending != null) {
+
+        iconFavoritoTrending[indexFavoritoTrending].setAttribute("src", "images/icon-fav-active.svg");
+        iconFavoritoTrending[indexFavoritoTrending].classList.add("tildado");
+        iconFavoritoTrending[indexFavoritoTrending].classList.add("guardado");
+        posicionFavTrendMax.push(indexFavoritoTrending); //agregp la posicion en FavTrendMax
+        posicionFavTrend.push(indexFavoritoTrending); //agrego la posicion en FavTrend
+    }
+
+}
 
 
 //FUNCIÓN PARA MAXIMIZAR LOS GIFS DE FAVORITOS
 
-let posicionFavorito;
+let posicionFavSeccionMax; //posicion del gif favorito en ``Favoritos´´ pero maximizado
 
 function maximizarFavorito() {
 
@@ -217,24 +278,86 @@ function maximizarFavorito() {
 
         if(imgMaximizar[l].className == "maximizar seccion activado") {
 
-            crearTarjetaMaximizada(arraySeccionFavoritos[l].images.fixed_height.url, arraySeccionFavoritos[l].title, arraySeccionFavoritos[l].username, arraySeccionFavoritos[l].images.original.url, "gifs-max-seccion", "favorito seccion", "itemBusqueda");
+            crearTarjetaMaximizada(arraySeccionFavoritos[l].images.fixed_height.url, arraySeccionFavoritos[l].title, arraySeccionFavoritos[l].username, arraySeccionFavoritos[l].images.original.url, "gifs-max-seccion", "favorito seccion-max", "itemBusqueda");
 
-            posicionFavorito = l;
+            posicionFavSeccionMax = l;
 
-            let favoritoSeccion = document.querySelector("img#itemBusqueda.favorito.seccion"); //harcodeo imagen estable
+            mantenerActivadoSeccion(posicionFavSeccionMax);
+            
+            return;
+        }  
+    }
+}
 
+
+// FUNCIÓN PARA MANTENER ACTIVA EL FAVORITO DE LA IMAGEN MAXIMIZADA
+
+function mantenerActivadoSeccion(posicion) {
+
+    let iconMaxSeccion = document.querySelector("img#itemBusqueda.favorito.seccion-max");
+    let titulo = document.getElementById("item2").textContent;
+
+    for (h = 0; h < arrayFavoritos.length; h++) {
+        
+        if(arrayFavoritos[h].title == titulo) {
+                            
             if(body.style.backgroundColor == "rgb(55, 56, 60)") { //modo nocturno
 
-                favoritoSeccion.setAttribute("src", "images/icon-fav-seccion-noc.svg");
+                iconMaxSeccion.setAttribute("src", "images/icon-fav-active-noc.svg");
+                iconMaxSeccion.classList.add("tildado");
+                iconMaxSeccion.classList.add("guardado");
         
             }else {
         
-                favoritoSeccion.setAttribute("src", "images/icon-fav-seccion.svg");
-        
+                iconMaxSeccion.setAttribute("src", "images/icon-fav-active.svg");
+                iconMaxSeccion.classList.add("tildado");
+                iconMaxSeccion.classList.add("guardado");
             }
-            
-            return;
-
-        }  
+        }
     }
+}
+
+
+// FUNCIÓN PARA GUARDAR GIF MAXIMIZADO Y PARA BORRARLO EN TODAS LAS SECCIONES (DESDE EL GIF MAXIMIZADO)
+
+function tildarMaxFavorito() {
+
+    let iconFavMax = document.querySelector("img#itemBusqueda.favorito.seccion-max");
+    let titulosGifoSeccion = document.getElementsByClassName("titulo-gifo seccion");
+    let iconSeccionFavoritos = document.getElementsByClassName("favorito seccion");
+    let titulo = document.getElementById("item2").textContent;
+
+    iconFavMax.classList.add("guardado");
+
+    for(t = 0; t < titulosGifoSeccion.length; t++) {
+
+        if(titulosGifoSeccion[t].textContent == titulo) {
+
+            iconSeccionFavoritos[t].classList.add("tildado");
+            iconSeccionFavoritos[t].setAttribute("src", "images/icon-fav-active.svg");
+        }
+    }
+
+    guardarFavoritoSeccion();
+}
+
+function borrarMaxFavorito() {
+
+    let iconFavMax = document.querySelector("img#itemBusqueda.favorito.seccion-max");
+    let titulosGifoSeccion = document.getElementsByClassName("titulo-gifo seccion");
+    let iconSeccionFavoritos = document.getElementsByClassName("favorito seccion");
+    let titulo = document.getElementById("item2").textContent;
+
+    iconFavMax.classList.remove("guardado");
+
+    for(t = 0; t < titulosGifoSeccion.length; t++) {
+
+        if(titulosGifoSeccion[t].textContent == titulo) {
+
+            iconSeccionFavoritos[t].classList.remove("tildado");
+            iconSeccionFavoritos[t].setAttribute("src", "images/icon-fav-hover.svg");
+        }
+    }
+
+    borrarFavoritoSeccion();
 }
