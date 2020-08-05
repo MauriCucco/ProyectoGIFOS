@@ -260,7 +260,7 @@ input.addEventListener("keyup", event => {
 //LLAMADA A LA API DE GIPHY PARA SUGERENCIAS
 
 let tituloBusqueda = document.getElementById("titulo-busqueda");
-let apiKey = "8uL8ygBG5KwNy4ij60wPxjjW8nuykVIR"
+let apiKey = "8uL8ygBG5KwNy4ij60wPxjjW8nuykVIR";
 
 async function getGif(url, value, api_key, number) {
     let endPoint =`http://${url}?q=${value}&api_key=${api_key}&limit=${number}&lang=es`;
@@ -960,7 +960,7 @@ right.addEventListener("click", event => {
 
         posicionFavSeccionMax = posicionFavSeccionMax + contador; //nueva posicion
 
-        mantenerActivadoSeccion(posicionFavSeccionMax); //mantiene activado el gif favorito maximizado al pasar de imagen en la sección ``Favoritos´´
+        mantenerActivadoSeccion(); //mantiene activado el gif favorito maximizado al pasar de imagen en la sección ``Favoritos´´
     }    
     
 })
@@ -1003,7 +1003,7 @@ left.addEventListener("click", () => {
 
         posicionFavSeccionMax = posicionFavSeccionMax - contador; //nueva posicion
 
-        mantenerActivadoSeccion(posicionFavSeccionMax); //mantiene activado el gif favorito maximizado al pasar de imagen en la sección ``Favoritos´´
+        mantenerActivadoSeccion(); //mantiene activado el gif favorito maximizado al pasar de imagen en la sección ``Favoritos´´
     }
     
 })

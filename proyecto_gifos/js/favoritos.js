@@ -282,7 +282,7 @@ function maximizarFavorito() {
 
             posicionFavSeccionMax = l;
 
-            mantenerActivadoSeccion(posicionFavSeccionMax);
+            mantenerActivadoSeccion();
             
             return;
         }  
@@ -292,7 +292,7 @@ function maximizarFavorito() {
 
 // FUNCIÓN PARA MANTENER ACTIVA EL FAVORITO DE LA IMAGEN MAXIMIZADA
 
-function mantenerActivadoSeccion(posicion) {
+function mantenerActivadoSeccion() {
 
     let iconMaxSeccion = document.querySelector("img#itemBusqueda.favorito.seccion-max");
     let titulo = document.getElementById("item2").textContent;
