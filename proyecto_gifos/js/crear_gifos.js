@@ -15,6 +15,8 @@ subiendo.textContent = "Estamos subiendo tu GIFO";
 subiendoImg.className = "subiendo-imagen";
 subiendoImg.setAttribute("src", "images/loader.svg");
 
+let arrayMisGifos = []; //array con los gifos creados
+
 botonCrear.addEventListener("click", event => {
 
     let seccionCrearGifos = document.getElementById("crear-gifos");
@@ -41,8 +43,8 @@ botonComenzar.addEventListener("click", event => {
     if(botonComenzar.textContent == "GRABAR") {
 
         video.play();
-        timer();
         recorder.startRecording();
+        timer();
         botonComenzar.textContent = "FINALIZAR"
         return
 
@@ -81,18 +83,26 @@ botonComenzar.addEventListener("click", event => {
 
         console.log(form.get('file')); //para chequear que el objeto FormData se creó correctamente
 
-        let file = form.get('file');
-
-        /*fetch(`https://upload.giphy.com/v1/gifs?api_key=${apiKey}&file=${file}`)
+        fetch("https://upload.giphy.com/v1/gifs?api_key=8uL8ygBG5KwNy4ij60wPxjjW8nuykVIR", {
+            method: "POST",
+            body: form
+        })
         .then(response => {
 
-            response.json();
-            console.log(response);
+            let data = response.json();
+            return data;
+        })
+        .then(resp => {
+            subiendo.textContent = "GIFO subido con éxito";
+            subiendo.style.left = "13rem";
+            subiendoImg.setAttribute("src", "images/check.svg");
+            arrayMisGifos.push(resp.data.id);
+            localStorage.setItem("gifos", JSON.stringify(arrayMisGifos));
         })
         .catch(err => {
 
             console.error("No se pudo subir el gif")
-        })*/
+        })
 
         return;
     }
