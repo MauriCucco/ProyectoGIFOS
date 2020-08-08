@@ -11,10 +11,25 @@ seccion.addEventListener("click", event => {
 
     event.target.style.color = "#9CAFC3";
     event.target.style.borderBottom = "unset"
+    linkGifos.style.color = "";
+    linkGifos.style.borderBottom = "";
+
+    botonCrear.style.backgroundColor = ""; //reseteo el boton crear
+    botonCrear.style.borderColor = "";
+    botonCrear.style.cursor = "";
+    spanSuma[0].style.backgroundColor = "";
+    spanSuma[1].style.backgroundColor = "";
 
     seccionPresentacion.style.display = "none";
     seccionBusquedas.style.display = "none";
+    seccionGifos.style.display = "none";
+    seccionCrearGifos.style.display = "none";
     seccionFavoritos.style.display = "unset";
+
+    if(seccionTrending.style.display = "none") {
+
+        seccionTrending.style.display = "";
+    }
 
     let guardado = localStorage.getItem("favoritos");
     arraySeccionFavoritos = JSON.parse(guardado);
@@ -41,7 +56,7 @@ function favoritos(array) {
 
         for(r = 0; r < array.length; r++) {
 
-            crearTarjeta(array[r].images.fixed_height_downsampled.url, array[r].title, array[r].username, ".galeria-imagenes-favoritos", "maximizar seccion");
+            crearTarjeta(array[r].images.fixed_height_downsampled.url, array[r].title, array[r].username, ".galeria-imagenes-favoritos", "maximizar seccion", "favorito", "descarga", "imagen");
 
             linkDescarga[r + cont].setAttribute("href", array[r].images.original.url);
             linkDescarga[r +cont].download = "descarga.gif"; 
@@ -68,7 +83,7 @@ function favoritos(array) {
 
         for(r = 0; r < 12; r++) {
 
-            crearTarjeta(array[r].images.fixed_height_downsampled.url, array[r].title, array[r].username, ".galeria-imagenes-favoritos", "maximizar seccion");
+            crearTarjeta(array[r].images.fixed_height_downsampled.url, array[r].title, array[r].username, ".galeria-imagenes-favoritos", "maximizar seccion", "favorito", "descarga", "imagen");
 
             linkDescarga[r + cont].setAttribute("href", array[r].images.original.url);
             linkDescarga[r +cont].download = "descarga.gif"; 
@@ -102,7 +117,7 @@ verMasFavoritos.addEventListener("click", () => {
 
         for(r = contFav; r < arraySeccionFavoritos.length; r++) {
 
-            crearTarjeta(arraySeccionFavoritos[r].images.fixed_height_downsampled.url, arraySeccionFavoritos[r].title, arraySeccionFavoritos[r].username, ".galeria-imagenes-favoritos", "maximizar seccion");
+            crearTarjeta(arraySeccionFavoritos[r].images.fixed_height_downsampled.url, arraySeccionFavoritos[r].title, arraySeccionFavoritos[r].username, ".galeria-imagenes-favoritos", "maximizar seccion", "favorito", "descarga", "imagen");
 
             linkDescarga[r + cont].setAttribute("href", arraySeccionFavoritos[r].images.original.url);
             linkDescarga[r +cont].download = "descarga.gif"; 
@@ -270,6 +285,7 @@ function maximizarFavorito() {
 
     seccionTrending.style.display = "none";
     seccionFavoritos.style.display = "none";
+    enFavoritos = true; //para saber que estoy en la sección ``Favoritos´´
     header.style.display = "none";
     footer.style.display = "none";
     gifMax.style.display = "unset";

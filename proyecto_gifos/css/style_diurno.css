@@ -203,17 +203,17 @@ span.separacion {
 #titulo-busqueda:after {
     content: unset;
 }
-.galeria-imagenes, .galeria-imagenes-favoritos {
+.galeria-imagenes, .galeria-imagenes-favoritos, .galeria-gifos {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
 }
-.galeria-imagenes .imagen, .galeria-imagenes-favoritos .imagen {
+.galeria-imagenes .imagen, .galeria-imagenes-favoritos .imagen, .imagen-gifos {
     margin-left: 1.05rem;
     margin-right: 1.05rem;
     
 }
-.galeria-imagenes .imagen .gifs, .galeria-imagenes-favoritos .imagen .gifs {
+.galeria-imagenes .imagen .gifs, .galeria-imagenes-favoritos .imagen .gifs, .galeria-gifos .imagen-gifos .gifs {
     width: 15.6rem;
     height: 12rem;
     margin-bottom: 2.5rem;
@@ -230,7 +230,7 @@ span.separacion {
     font-size: 1.3rem;
     color: #572EE5;
 }
-.sin-resultados, .sin-contenido {
+.sin-resultados, .sin-contenido, .sin-gifos {
     display: none;
 }
 .sin-resultados {
@@ -239,16 +239,16 @@ span.separacion {
     flex-direction: column;
     align-items: center;
 }
-.sin-resultados img, .sin-contenido img{
+.sin-resultados img, .sin-contenido img, .sin-gifos img{
     width: 15rem;
     height: 15rem;
     margin-bottom: 2.9rem;
 }
-.sin-contenido img {
+.sin-contenido img, .sin-gifos img {
     display: block;
     margin: 0 auto 2.4rem auto;
 }
-.sin-resultados h2, .sin-contenido h2 {
+.sin-resultados h2, .sin-contenido h2, .sin-gifos h2 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 2rem;
@@ -295,14 +295,14 @@ span.separacion {
     display: flex;
     flex-wrap: nowrap;
 }
-.imagen {
+.imagen, .imagen-gifos {
     margin-left: 1.1rem;
     margin-right: 1.1rem;
 }
-.imagen:nth-child(1) {
+.imagen:nth-child(1), .imagen-gifos:nth-child(1) {
     margin-left: 0;
 }
-.imagen img:last-child() {
+.imagen img:last-child(), .imagen-gifos img:last-child() {
     margin-right: 0;
 }
 .gifs {
@@ -378,7 +378,7 @@ footer p:nth-last-child() {
     position: relative;
     height: 24.5rem;
 }
-.gifs-max, .gifs-max-trending, .gifs-max-seccion {
+.gifs-max, .gifs-max-trending, .gifs-max-seccion, .gifs-max-gifos {
     width: 31.8rem;
     height: 24.5rem;
 }
@@ -457,6 +457,13 @@ footer p:nth-last-child() {
     line-height: 30px;
     margin-bottom: 4.6rem;
 }
+
+/* SECCION MIS GIFOS*/
+
+#mis-gifos {
+    display: none;
+}
+
 
 
 /* VERSIÓN DESKTOP*/
@@ -675,13 +682,13 @@ footer p:nth-last-child() {
         display: flex;
         scroll-behavior: smooth;
     }
-    .imagen {
+    .imagen, .imagen-gifos {
         position: relative;
         height: 27.5rem;
         margin-left: 1.4rem;
         margin-right: 1.4rem;
     }
-    .imagen:hover {
+    .imagen:hover, .imagen-gifos:hover {
         background-color: #572EE5;
     }
     .gifs {
@@ -691,7 +698,7 @@ footer p:nth-last-child() {
     .gifs:last-child {
         margin-right: 0;
     }
-    .imagen:hover .gifs {
+    .imagen:hover .gifs, .imagen-gifos:hover .gifs {
         opacity: 0.6;
     }
     .primer-boton-trend, .segundo-boton-trend {
@@ -739,14 +746,14 @@ footer p:nth-last-child() {
     .icon:hover {
         opacity: 1;
     }
-    .imagen:hover .iconos {
+    .imagen:hover .iconos, .imagen-gifos:hover .iconos {
         display: flex;
         position: absolute;
         z-index: 2;
         bottom: 23.3rem;
         left: 23rem;
     }
-    .imagen:hover .info {
+    .imagen:hover .info, .imagen-gifos .info {
         display: flex;
         flex-direction: column;
         position: absolute;
@@ -783,20 +790,20 @@ footer p:nth-last-child() {
         margin-bottom: 5.9rem;
         line-height: 3rem;
     }
-    .galeria-imagenes .imagen, .galeria-imagenes-favoritos .imagen {
+    .galeria-imagenes .imagen, .galeria-imagenes-favoritos .imagen, .imagen-gifos {
         height: 20rem;
         margin: 0 1.45rem 2.9rem 1.45rem;
         position: relative;  
     }
-    .galeria-imagenes .imagen .gifs, .galeria-imagenes-favoritos .imagen .gifs {
+    .galeria-imagenes .imagen .gifs, .galeria-imagenes-favoritos .imagen .gifs, .galeria-gifos .imagen-gifos .gifs {
         width: 26rem;
         height: 20rem;
     }
-    .galeria-imagenes .imagen .iconos, .galeria-imagenes-favoritos .imagen .iconos {
+    .galeria-imagenes .imagen .iconos, .galeria-imagenes-favoritos .imagen .iconos, .galeria-gifos .imagen-gifos .iconos {
         bottom: 15.8rem;
         left: 13.3rem;
     }
-    .galeria-imagenes .imagen .info, .galeria-imagenes-favoritos .imagen .info {
+    .galeria-imagenes .imagen .info, .galeria-imagenes-favoritos .imagen .info, .galeria-gifos .imagen-gifos .info {
         margin-left: 1.3rem;
         margin-right: 1.3rem;
         margin-bottom: 2.7rem;
@@ -878,7 +885,7 @@ footer p:nth-last-child() {
         margin-left: 1.4rem;
         margin-right: 1.4rem;
     }
-    .gifs-max, .gifs-max-trending, .gifs-max-seccion {
+    .gifs-max, .gifs-max-trending, .gifs-max-seccion, .gifs-max-gifos {
         width: 69.5rem;
         height: 38.5rem;
     }

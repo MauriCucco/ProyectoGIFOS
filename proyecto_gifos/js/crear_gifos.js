@@ -41,14 +41,21 @@ iconLink.setAttribute("src", "images/icon-link.svg");
 
 let arrayMisGifos = []; //array con los gifos creados
 
-botonCrear.addEventListener("click", event => {
+if(localStorage.getItem("gifos") != undefined) {
 
-    let seccionCrearGifos = document.getElementById("crear-gifos");
+    let gifosGuardados = localStorage.getItem("gifos");
+    arrayMisGifos = JSON.parse(gifosGuardados);
+}
+
+let seccionCrearGifos = document.getElementById("crear-gifos");
+
+botonCrear.addEventListener("click", event => {
 
     seccionPresentacion.style.display = "none";
     seccionTrending.style.display = "none";
     seccionBusquedas.style.display = "none";
     seccionFavoritos.style.display = "none";
+    seccionGifos.style.display = "none";
 
     seccionCrearGifos.style.display = "unset";
 
@@ -57,6 +64,11 @@ botonCrear.addEventListener("click", event => {
     botonCrear.style.cursor = "initial";
     spanSuma[0].style.backgroundColor = "white";
     spanSuma[1].style.backgroundColor = "white";
+
+    seccion.style.color = "";
+    seccion.style.borderBottom = "";
+    linkGifos.style.color = "";
+    linkGifos.style.borderBottom = "";
 
 })
 
@@ -131,12 +143,13 @@ botonComenzar.addEventListener("click", event => {
         })
         .then(resp => {
 
-            let idGifo = resp.data.id; //guardo el id
-            arrayMisGifos.push(resp.data.id);
-            localStorage.setItem("gifos", JSON.stringify(arrayMisGifos));
+            let idGifo = resp.data.id; //guardo el id 
 
             fetch(`https://api.giphy.com/v1/gifs/${idGifo}?api_key=8uL8ygBG5KwNy4ij60wPxjjW8nuykVIR`)
-            .then(response => response.json())
+            .then(response => 
+
+                response.json())
+
             .then(resp => {
 
                 subiendo.textContent = "GIFO subido con éxito";
@@ -146,6 +159,9 @@ botonComenzar.addEventListener("click", event => {
                 linkDescarga.setAttribute("download", "descarga.gif");
                 linkDescarga.setAttribute("href", resp.data.images.original.url);
                 linkGifo.setAttribute("href", resp.data.url);
+
+                arrayMisGifos.push(resp.data);
+                localStorage.setItem("gifos", JSON.stringify(arrayMisGifos)); //guardo la info del gifo
 
             })   
         })
@@ -174,7 +190,7 @@ botonComenzar.addEventListener("click", event => {
     let parrafoCrear = document.getElementsByClassName("parrafo-crear");
 
     titulo1.textContent = "¿Nos das acceso";
-    titulo2.className = "titulo-crear-modificado"
+    titulo2.className = "titulo-crear-modificado";
     titulo2.textContent = "a tu cámara?";
     parrafoCrear[0].textContent = "El acceso a tu cámara será válido sólo"
     parrafoCrear[1].textContent = "por el tiempo en el que estés creando el GIFO."

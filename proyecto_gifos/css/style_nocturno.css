@@ -206,17 +206,17 @@ span.separacion {
 #titulo-busqueda:after {
     content: unset;
 }
-.galeria-imagenes, .galeria-imagenes-favoritos {
+.galeria-imagenes, .galeria-imagenes-favoritos, .galeria-gifos{
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
 }
-.galeria-imagenes .imagen, .galeria-imagenes-favoritos .imagen {
+.galeria-imagenes .imagen, .galeria-imagenes-favoritos .imagen, .imagen-gifos {
     margin-left: 1.05rem;
     margin-right: 1.05rem;
     
 }
-.galeria-imagenes .imagen .gifs, .galeria-imagenes-favoritos .imagen .gifs {
+.galeria-imagenes .imagen .gifs, .galeria-imagenes-favoritos .imagen .gifs, .galeria-gifos .imagen-gifos .gifs {
     width: 15.6rem;
     height: 12rem;
     margin-bottom: 2.5rem;
@@ -233,25 +233,25 @@ span.separacion {
     font-size: 1.3rem;
     color: white;
 }
-.sin-resultados, .sin-contenido {
+.sin-resultados, .sin-contenido, .sin-gifos {
     display: none;
 }
-.sin-resultados, .sin-contenido {
+.sin-resultados {
     padding-top: 5rem;
     margin-bottom: 14.9rem;
     flex-direction: column;
     align-items: center;
 }
-.sin-resultados img, .sin-contenido img{
+.sin-resultados img, .sin-contenido img, .sin-gifos img{
     width: 15rem;
     height: 15rem;
     margin-bottom: 2.9rem;
 }
-.sin-contenido img {
+.sin-contenido img, .sin-gifos img {
     display: block;
     margin: 0 auto 2.4rem auto;
 }
-.sin-resultados h2, .sin-contenido h2 {
+.sin-resultados h2, .sin-contenido h2, .sin-gifos h2 {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 2rem;
@@ -788,20 +788,20 @@ footer p:nth-last-child() {
         margin-bottom: 5.9rem;
         line-height: 3rem;
     }
-    .galeria-imagenes .imagen, .galeria-imagenes-favoritos .imagen {
+    .galeria-imagenes .imagen, .galeria-imagenes-favoritos .imagen, .imagen-gifos {
         height: 20rem;
         margin: 0 1.45rem 2.9rem 1.45rem;
         position: relative;  
     }
-    .galeria-imagenes .imagen .gifs, .galeria-imagenes-favoritos .imagen .gifs {
+    .galeria-imagenes .imagen .gifs, .galeria-imagenes-favoritos .imagen .gifs, .galeria-gifos .imagen-gifos .gifs {
         width: 26rem;
         height: 20rem;
     }
-    .galeria-imagenes .imagen .iconos, .galeria-imagenes-favoritos .imagen .iconos {
+    .galeria-imagenes .imagen .iconos, .galeria-imagenes-favoritos .imagen .iconos, .galeria-gifos .imagen-gifos .iconos {
         bottom: 15.8rem;
         left: 13.3rem;
     }
-    .galeria-imagenes .imagen .info, .galeria-imagenes-favoritos .imagen .info {
+    .galeria-imagenes .imagen .info, .galeria-imagenes-favoritos .imagen .info, .galeria-gifos .imagen-gifos .info {
         margin-left: 1.3rem;
         margin-right: 1.3rem;
         margin-bottom: 2.7rem;
