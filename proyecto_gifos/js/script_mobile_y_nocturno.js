@@ -41,6 +41,8 @@ let gifos = document.querySelector("text#GIFOS");
 let head = document.getElementById("head");
 let searchIcon = document.querySelector(".search-icon");
 let close = document.querySelector(".close");
+let camara = document.querySelector(".camara");
+let pelicula = document.getElementById("pelicula");
 
 modo.addEventListener("click", () => {
 
@@ -58,6 +60,9 @@ modo.addEventListener("click", () => {
 
         gifos.style.fill = "#FFFFFF";
 
+        camara.setAttribute("src", "images/camara-modo-noc.svg");
+        pelicula.setAttribute("src", "images/pelicula-modo-noc.svg");
+
         head.appendChild(modoNocturno);
 
     }else if(event.target.textContent == "Modo Diurno") {
@@ -73,6 +78,9 @@ modo.addEventListener("click", () => {
         inactivo.setAttribute("src", "images/icon-search.svg");
 
         close.setAttribute("src", "images/close.svg");
+
+        camara.setAttribute("src", "images/camara.svg");
+        pelicula.setAttribute("src", "images/pelicula.svg");
 
         head.removeChild(modoNocturno);
 

@@ -20,16 +20,21 @@ function inputSearch() {
         input.classList.remove("input-activo");
         inactivo.classList.remove("inactivo-activo");
         lista.classList.remove("sugerencias-activo");
+
         for(i = 0; i < li.length; i++) {
             li[i].classList.remove("li-sugerencias-activo"); 
         }
+
         for(i = 0; i < li.length; i++) {
             img[i].classList.remove("list-img-activo"); 
         }
+
         for(i = 0; i < li.length; i++) {
             p[i].classList.remove("list-p-activo"); 
         }
+
         search.classList.remove("search-activo");
+
         if(body.style.backgroundColor == "rgb(55, 56, 60)") { //modo nocturno
 
             imgSearch.setAttribute("src", "images/icon-search-mod-noc.svg");
@@ -39,6 +44,7 @@ function inputSearch() {
             imgSearch.setAttribute("src", "images/icon-search.svg");
 
         }
+        
         imgSearch.classList.remove("img-close");
         imgSearch.classList.add("search-icon");
     

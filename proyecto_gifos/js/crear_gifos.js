@@ -10,10 +10,34 @@ video.className = "video-player";
 
 let subiendo = document.createElement("p"); //texto que aparece una vez que se está subiendo el gif
 let subiendoImg = document.createElement("img");
+let contenedor = document.createElement("div");
+let divDescarga = document.createElement("div");
+let divLink = document.createElement("div");
+let linkDescarga = document.createElement("a");
+let linkGifo = document.createElement("a");
+let iconDescarga = document.createElement("img");
+let iconLink = document.createElement("img");
 subiendo.className = "subiendo";
 subiendo.textContent = "Estamos subiendo tu GIFO";
 subiendoImg.className = "subiendo-imagen";
 subiendoImg.setAttribute("src", "images/loader.svg");
+contenedor.appendChild(divDescarga);
+contenedor.appendChild(divLink);
+divDescarga.appendChild(linkDescarga);
+divLink.appendChild(linkGifo);
+linkDescarga.appendChild(iconDescarga);
+linkGifo.appendChild(iconLink);
+contenedor.className = "contenedor-gifo";
+divDescarga.className = "icon"; //los mismos que uso en los cards
+divLink.className = "icon";
+linkDescarga.className = "descarga-gifo";
+linkGifo.className = "link-gifo";
+iconDescarga.className = "img-descarga";
+iconLink.className = "img-link";
+linkDescarga.setAttribute("target", "_blank");
+linkGifo.setAttribute("target", "_blank");
+iconDescarga.setAttribute("src", "images/icon-download.svg");
+iconLink.setAttribute("src", "images/icon-link.svg");
 
 let arrayMisGifos = []; //array con los gifos creados
 
@@ -63,10 +87,23 @@ botonComenzar.addEventListener("click", event => {
     }else if (botonComenzar.textContent == "SUBIR GIFO") {
 
         botonComenzar.style.visibility = "hidden";
-        paso2.style.color = "#572EE5";
-        paso2.style.backgroundColor = "white";
-        paso3.style.color = "white";
-        paso3.style.backgroundColor = "#572EE5";
+
+        if(body.style.backgroundColor == "rgb(55, 56, 60)") { //modo nocturno
+
+            paso2.style.color = "white";
+            paso2.style.backgroundColor = "rgb(55, 56, 60)";
+            paso3.style.color = "black";
+            paso3.style.backgroundColor = "white";
+
+        }else {
+
+            paso2.style.color = "#572EE5";
+            paso2.style.backgroundColor = "white";
+            paso3.style.color = "white";
+            paso3.style.backgroundColor = "#572EE5";
+
+        }
+        
         cronometro.innerHTML = "";
         cronometro.classList.remove("timer-off");
         cronometro.style.width = "7rem";
@@ -93,11 +130,24 @@ botonComenzar.addEventListener("click", event => {
             return data;
         })
         .then(resp => {
-            subiendo.textContent = "GIFO subido con éxito";
-            subiendo.style.left = "13rem";
-            subiendoImg.setAttribute("src", "images/check.svg");
+
+            let idGifo = resp.data.id; //guardo el id
             arrayMisGifos.push(resp.data.id);
             localStorage.setItem("gifos", JSON.stringify(arrayMisGifos));
+
+            fetch(`https://api.giphy.com/v1/gifs/${idGifo}?api_key=8uL8ygBG5KwNy4ij60wPxjjW8nuykVIR`)
+            .then(response => response.json())
+            .then(resp => {
+
+                subiendo.textContent = "GIFO subido con éxito";
+                subiendo.style.left = "13rem";
+                subiendoImg.setAttribute("src", "images/check.svg");
+                divVideo.appendChild(contenedor);
+                linkDescarga.setAttribute("download", "descarga.gif");
+                linkDescarga.setAttribute("href", resp.data.images.original.url);
+                linkGifo.setAttribute("href", resp.data.url);
+
+            })   
         })
         .catch(err => {
 
@@ -107,8 +157,17 @@ botonComenzar.addEventListener("click", event => {
         return;
     }
 
-    paso1.style.color = "white";
-    paso1.style.backgroundColor = "#572EE5";
+    if(body.style.backgroundColor == "rgb(55, 56, 60)") { //modo nocturno
+
+        paso1.style.color = "black";
+        paso1.style.backgroundColor = "white";
+
+    }else {
+
+        paso1.style.color = "white";
+        paso1.style.backgroundColor = "#572EE5";
+
+    }
 
     let titulo1 = document.querySelector(".titulo-crear");
     let titulo2 = document.querySelector(".titulo-crear2");
@@ -123,6 +182,7 @@ botonComenzar.addEventListener("click", event => {
 
     getStreamAndRecord(); //abre la cámara
 })
+
 
 
 // FUNCIÓN PARA USAR LA CÁMARA Y PREPARAR EL PASO 2
@@ -155,10 +215,23 @@ function getStreamAndRecord() {
         divVideo.innerHTML = "";
         divVideo.appendChild(video);
         divVideo.className = "div-video-encendido"
-        paso1.style.color = "#572EE5";
-        paso1.style.backgroundColor = "white";
-        paso2.style.color = "white";
-        paso2.style.backgroundColor = "#572EE5";
+
+        if(body.style.backgroundColor == "rgb(55, 56, 60)") { //modo nocturno
+
+            paso1.style.color = "white";
+            paso1.style.backgroundColor = "rgb(55, 56, 60)";
+            paso2.style.color = "black";
+            paso2.style.backgroundColor = "white";
+
+        }else {
+
+            paso1.style.color = "#572EE5";
+            paso1.style.backgroundColor = "white";
+            paso2.style.color = "white";
+            paso2.style.backgroundColor = "#572EE5";
+
+        }
+        
         botonComenzar.textContent = "GRABAR"
 
         video.pause();

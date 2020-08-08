@@ -726,7 +726,7 @@ footer p:nth-last-child() {
     .icon {
         display: flex;
         justify-content: center;
-        align-content: center;
+        align-items: center;
         width: 3.2rem;
         height: 3.2rem;
         opacity: 0.7;
@@ -1115,14 +1115,20 @@ footer p:nth-last-child() {
         justify-content: space-between;
     }
     #borde-superior div.borde:nth-child(2) {
+        width: 2.5rem;
+        height: 2.7rem;
         display: flex;
         align-items: flex-start;
         transform: rotate(-270deg);
     }
     #borde-inferior div.borde:nth-child(1) {
+        width: 2.5rem;
+        height: 2.7rem;
         transform: rotate(-90deg);
     }
     #borde-inferior div.borde:nth-child(2) {
+        width: 2.7rem;
+        height: 2.5rem;
         transform: rotate(-180deg);
     }
     .div-video-encendido {
@@ -1151,5 +1157,12 @@ footer p:nth-last-child() {
         margin-top: 12.2rem;
         margin-bottom: 1rem;
         right: 20rem;  
+    }
+    .contenedor-gifo {
+        display: flex;
+        position: absolute;
+        bottom: 27.5rem;
+        left: 34rem;
+        margin-top: 1.2rem;
     }
 }
