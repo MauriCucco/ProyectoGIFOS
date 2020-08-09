@@ -98,7 +98,8 @@ document.addEventListener("click", event => {
 
             closeInputSearch(); //cierra el input al clickear fuera de él
 
-    }else if (event.target.className == "list-p list-p-activo") {
+    }else if (event.target.className == "list-p list-p-activo"
+              || event.target.className == "contenido-trending") {
 
             input.value = event.target.textContent;
             galeria.innerHTML = ""; //limpio la sección
@@ -414,12 +415,20 @@ function busqueda(string) {
 
 async function trendingPopulares() {
 
-    let trendingP = document.getElementById("contenido");
+    let contenidoTrending = document.getElementsByClassName("contenido-trending");
 
     const resp2 = await fetch(`https://api.giphy.com/v1/trending/searches?api_key=${apiKey}`);
     const trendings = await resp2.json();
 
-    trendingP.textContent = `${trendings.data[0]}, ${trendings.data[1]}, ${trendings.data[2]}, ${trendings.data[3]}, ${trendings.data[4]}`;
+    for(k = 0; k < contenidoTrending.length; k++) {
+
+        contenidoTrending[k].textContent = `${trendings.data[k]}`;
+
+        if(k <= 3) {
+
+           contenidoTrending[k].after(","); 
+        }
+    }
 
 };
 

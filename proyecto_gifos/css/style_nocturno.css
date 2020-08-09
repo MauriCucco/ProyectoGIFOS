@@ -184,6 +184,9 @@ span.hamburguesa {
     line-height: 2.5rem;
     color: white;
 }
+.contenido-trending {
+    cursor: pointer;
+}
 
 /*SECCION BUSQUEDAS*/
 
@@ -306,8 +309,8 @@ span.separacion {
 .imagen:nth-child(1) {
     margin-left: 0;
 }
-.imagen img:last-child() {
-    margin-right: 0;
+#trending-slide .imagen:last-child img {
+    margin-right: 2.2rem;
 }
 .gifs {
     width: 24.3rem;
@@ -329,9 +332,6 @@ footer {
 }
 footer p {
     font-family: 'Roboto', sans-serif;
-    font-size: 1.4rem;
-}
-footer p:nth-last-child() {
     font-size: 1.4rem;
 }
 .redes {
@@ -425,7 +425,6 @@ footer p:nth-last-child() {
     justify-self: center;
     position: relative;
     bottom: 0.8rem;
-    border-color: none;
 }
 #favorito-max {
     justify-self: end;
@@ -776,6 +775,10 @@ footer p:nth-last-child() {
         text-align: left;
         text-transform: capitalize;
     }
+    #trending-slide .imagen:last-child img {
+        margin-right: 0;
+    }
+
 
      /* SECCION BUSQUEDAS */
     

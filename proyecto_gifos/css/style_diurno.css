@@ -181,6 +181,9 @@ span.hamburguesa {
     color: #572EE5;
     text-align: center;
 }
+.contenido-trending {
+    cursor: pointer;
+}
 
 /*SECCION BUSQUEDAS*/
 
@@ -303,8 +306,8 @@ span.separacion {
 .imagen:nth-child(1), .imagen-gifos:nth-child(1) {
     margin-left: 0;
 }
-.imagen img:last-child(), .imagen-gifos img:last-child() {
-    margin-right: 0;
+#trending-slide .imagen:last-child img {
+    margin-right: 2.2rem;
 }
 .gifs {
     width: 24.3rem;
@@ -326,9 +329,6 @@ footer {
 }
 footer p {
     font-family: 'Roboto', sans-serif;
-    font-size: 1.4rem;
-}
-footer p:nth-last-child() {
     font-size: 1.4rem;
 }
 .redes {
@@ -422,7 +422,6 @@ footer p:nth-last-child() {
 #itemBusqueda, #itemTrending {
     position: relative;
     bottom: 0.8rem;
-    border-color: none;
 }
 #favorito-max {
     justify-self: end;
@@ -783,6 +782,9 @@ footer p:nth-last-child() {
         color: white;
         text-align: left;
         text-transform: capitalize;
+    }
+    #trending-slide .imagen:last-child img {
+        margin-right: 0;
     }
 
      /* SECCION BUSQUEDAS */
