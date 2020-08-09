@@ -53,12 +53,13 @@ function favoritos(array) {
         let linkDescarga = document.getElementsByClassName("descarga");
         let iconSeccionFavoritos = document.getElementsByClassName("favorito");
         let titulosGifo = document.getElementsByClassName("titulo-gifo");
+        let imagenFavoritos = document.getElementsByClassName("gifs");
 
         for(r = 0; r < array.length; r++) {
 
             crearTarjeta(array[r].images.fixed_height_downsampled.url, array[r].title, array[r].username, ".galeria-imagenes-favoritos", "maximizar seccion", "favorito", "descarga", "imagen");
 
-            linkDescarga[r + cont].setAttribute("href", array[r].images.original.url);
+            linkDescarga[r + cont].setAttribute("href", array[r].images.original.url); //cont es porque aparecen después de los iconos de ``Búsquedas´´
             linkDescarga[r +cont].download = "descarga.gif"; 
             
             iconSeccionFavoritos[r + cont].classList.add("seccion");
@@ -66,6 +67,8 @@ function favoritos(array) {
             iconSeccionFavoritos[r + cont].classList.add("guardado");
 
             iconSeccionFavoritos[r + cont].setAttribute("src", "images/icon-fav-active.svg");
+
+            imagenFavoritos[r + cont].classList.add("seccion");
 
             titulosGifo[r + cont].classList.add("seccion");
             
@@ -80,6 +83,7 @@ function favoritos(array) {
         let linkDescarga = document.getElementsByClassName("descarga");
         let iconSeccionFavoritos = document.getElementsByClassName("favorito");
         let titulosGifo = document.getElementsByClassName("titulo-gifo");
+        let imagenFavoritos = document.getElementsByClassName("gifs");
 
         for(r = 0; r < 12; r++) {
 
@@ -92,9 +96,11 @@ function favoritos(array) {
             iconSeccionFavoritos[r + cont].classList.add("tildado"); //para que ya queden tildados
             iconSeccionFavoritos[r + cont].classList.add("guardado");
 
-            titulosGifo[r + cont].classList.add("seccion");
-        
             iconSeccionFavoritos[r + cont].setAttribute("src", "images/icon-fav-active.svg");
+
+            imagenFavoritos[r + cont].classList.add("seccion");
+
+            titulosGifo[r + cont].classList.add("seccion");
 
             verMasFavoritos.style.display = "block"; 
         }
@@ -113,6 +119,7 @@ verMasFavoritos.addEventListener("click", () => {
         let linkDescarga = document.getElementsByClassName("descarga");
         let iconSeccionFavoritos = document.getElementsByClassName("favorito");
         let titulosGifo = document.getElementsByClassName("titulo-gifo");
+        let imagenFavoritos = document.getElementsByClassName("gifs");
         let vueltas;
 
         for(r = contFav; r < arraySeccionFavoritos.length; r++) {
@@ -126,9 +133,11 @@ verMasFavoritos.addEventListener("click", () => {
             iconSeccionFavoritos[r + cont].classList.add("tildado"); //para que ya queden tildados
             iconSeccionFavoritos[r + cont].classList.add("guardado");
 
-            titulosGifo[r + cont].classList.add("seccion");
-
             iconSeccionFavoritos[r + cont].setAttribute("src", "images/icon-fav-active.svg");
+
+            imagenFavoritos[r + cont].classList.add("seccion");
+
+            titulosGifo[r + cont].classList.add("seccion");
             
             vueltas = r;
     
@@ -282,6 +291,7 @@ function maximizarFavorito() {
 
     let gifMax = document.getElementById("gif-maximizado");
     let imgMaximizar = document.getElementsByClassName("maximizar seccion");
+    let imagenSeccion = document.getElementsByClassName("gifs seccion");
 
     seccionTrending.style.display = "none";
     seccionFavoritos.style.display = "none";
@@ -292,7 +302,9 @@ function maximizarFavorito() {
 
     for(l = 0; l < arraySeccionFavoritos.length; l++) {
 
-        if(imgMaximizar[l].className == "maximizar seccion activado") {
+        if(imgMaximizar[l].className == "maximizar seccion activado"
+           || imagenSeccion[l].className == "gifs seccion activado") {
+
 
             crearTarjetaMaximizada(arraySeccionFavoritos[l].images.fixed_height.url, arraySeccionFavoritos[l].title, arraySeccionFavoritos[l].username, arraySeccionFavoritos[l].images.original.url, "gifs-max-seccion", "favorito seccion-max", "itemBusqueda");
 
