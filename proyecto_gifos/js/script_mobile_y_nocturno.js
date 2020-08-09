@@ -58,9 +58,13 @@ modo.addEventListener("click", () => {
 
     if(event.target.textContent == "Modo Nocturno") {
 
+        head.appendChild(modoNocturno);
+
         event.target.textContent = "Modo Diurno";
 
-        body.style.backgroundColor = "rgb(55, 56, 60)"
+        body.style.backgroundColor = "rgb(55, 56, 60)";
+
+        head.style.backgroundColor = "rgb(55, 56, 60)";
 
         searchIcon.setAttribute("src", "images/icon-search-mod-noc.svg");
 
@@ -73,15 +77,15 @@ modo.addEventListener("click", () => {
         camara.setAttribute("src", "images/camara-modo-noc.svg");
         pelicula.setAttribute("src", "images/pelicula-modo-noc.svg");
 
-        head.appendChild(modoNocturno);
-
     }else if(event.target.textContent == "Modo Diurno") {
 
         event.target.textContent = "Modo Nocturno";
 
         gifos.style.fill = "#572EE5";
 
-        body.style.backgroundColor = "unset"
+        body.style.backgroundColor = "unset";
+
+        head.style.backgroundColor = "unset";
 
         searchIcon.setAttribute("src", "images/icon-search.svg");
 
