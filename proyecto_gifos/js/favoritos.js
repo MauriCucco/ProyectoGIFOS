@@ -299,6 +299,8 @@ function maximizarFavorito() {
             posicionFavSeccionMax = l;
 
             mantenerActivadoSeccion();
+
+            linkClose.setAttribute("href", "#favoritos"); //para luego cerrar e ir a esa sección
             
             return;
         }  

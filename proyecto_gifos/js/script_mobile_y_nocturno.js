@@ -5,10 +5,9 @@ document.addEventListener("click", event => {
     if (window.matchMedia("(max-width: 1199px)").matches) {
 
         let menuHamburguesa = document.querySelector(".menu");
+        let checkbox = document.getElementById("hamburguesa_checkbox");
 
         if(event.target.id == "hamburguesa_checkbox") {
-
-            let checkbox = document.getElementById("hamburguesa_checkbox");
 
             if(checkbox.checked) {
 
@@ -18,6 +17,17 @@ document.addEventListener("click", event => {
 
                 menuHamburguesa.style.display = "none";
             }
+
+        }else if (event.target.id == "segundo"
+                  || event.target.id == "tercero") {
+
+            if(checkbox.checked) {
+
+                menuHamburguesa.style.display = "none";
+                checkbox.checked = false;
+        
+            }
+
         }
     } 
 })
@@ -37,7 +47,7 @@ let modo = document.getElementById("primero");
 let modoNocturno = document.createElement("link");
 modoNocturno.setAttribute("rel", "stylesheet");
 modoNocturno.setAttribute("href", "css/style_nocturno.css")
-let gifos = document.querySelector("text#GIFOS");
+let gifos = document.querySelector("text#texto-gifos");
 let head = document.getElementById("head");
 let searchIcon = document.querySelector(".search-icon");
 let close = document.querySelector(".close");

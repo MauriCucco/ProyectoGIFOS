@@ -13,42 +13,13 @@ let body = document.getElementById("body");
 
 function inputSearch() {
 
-    let p = document.getElementsByClassName("list-p"); //después que los crea crearSugerencia()
-
     if(input.value === "") {
 
-        input.classList.remove("input-activo");
-        inactivo.classList.remove("inactivo-activo");
-        lista.classList.remove("sugerencias-activo");
-
-        for(i = 0; i < li.length; i++) {
-            li[i].classList.remove("li-sugerencias-activo"); 
-        }
-
-        for(i = 0; i < li.length; i++) {
-            img[i].classList.remove("list-img-activo"); 
-        }
-
-        for(i = 0; i < li.length; i++) {
-            p[i].classList.remove("list-p-activo"); 
-        }
-
-        search.classList.remove("search-activo");
-
-        if(body.style.backgroundColor == "rgb(55, 56, 60)") { //modo nocturno
-
-            imgSearch.setAttribute("src", "images/icon-search-mod-noc.svg");
-
-        }else {
-
-            imgSearch.setAttribute("src", "images/icon-search.svg");
-
-        }
-        
-        imgSearch.classList.remove("img-close");
-        imgSearch.classList.add("search-icon");
+        closeInputSearch();
     
     }else if(lista.firstElementChild !== null) { //si hay sugerencias en el input
+
+        let p = document.getElementsByClassName("list-p"); //después que los crea crearSugerencia()
 
         input.classList.add("input-activo");
         inactivo.classList.add("inactivo-activo");
@@ -78,7 +49,7 @@ function inputSearch() {
     }
 }
 
-function closeInputSearch () {
+function closeInputSearch() {
 
     let p = document.getElementsByClassName("list-p"); //después que los crea crearSugerencia()
     
@@ -237,7 +208,8 @@ document.addEventListener("click", event => {
             maximizarGif();
         } 
 
-    }else if (event.target.className == "eliminar") {
+    }else if (event.target.className == "eliminar"
+              || event.target.className == "eliminar-max") {
 
         event.target.classList.add("activado");
         eliminarGifo();
@@ -279,7 +251,7 @@ let tituloBusqueda = document.getElementById("titulo-busqueda");
 let apiKey = "8uL8ygBG5KwNy4ij60wPxjjW8nuykVIR";
 
 async function getGif(url, value, api_key, number) {
-    let endPoint =`http://${url}?q=${value}&api_key=${api_key}&limit=${number}&lang=es`;
+    let endPoint =`https://${url}?q=${value}&api_key=${api_key}&limit=${number}&lang=es`;
     const resp = await fetch(endPoint);
     const data = await resp.json();
     return data;
@@ -432,7 +404,7 @@ async function trendingPopulares() {
 
     let trendingP = document.getElementById("contenido");
 
-    const resp2 = await fetch(`http://api.giphy.com/v1/trending/searches?api_key=${apiKey}`);
+    const resp2 = await fetch(`https://api.giphy.com/v1/trending/searches?api_key=${apiKey}`);
     const trendings = await resp2.json();
 
     trendingP.textContent = `${trendings.data[0]}, ${trendings.data[1]}, ${trendings.data[2]}, ${trendings.data[3]}, ${trendings.data[4]}`;
@@ -774,6 +746,7 @@ let seccionTrending = document.getElementById("trending-slide");
 let seccionPresentacion = document.getElementById("presentacion");
 let header = document.getElementById("header")
 let footer = document.getElementById("footer");
+let linkClose = document.querySelector(".close-max");
 let enFavoritos = false; //booleano para saber si estoy en la sección ``Favoritos´´
 let enGifos = false; //booleano para saber si estoy en la sección ``Gifos´´
 
@@ -816,6 +789,9 @@ function maximizarGif() {
             posicion = l;
 
             mantenerActivadoBusquedas(); //funcion que mantiene activado el favorito en el gif maximizado de ``Búsquedas´´
+
+            linkClose.setAttribute("href", "#busquedas") //para luego cerrar e ir a esa sección
+
             return;
 
         }  
@@ -831,6 +807,9 @@ function maximizarGif() {
             posicionTrending = u;
 
             mantenerActivadoTrend(); //función que mantiene el favorito activado en el gif maximizado
+
+            linkClose.setAttribute("href", "#trending-slide"); //para luego cerrar e ir a esa sección
+
             return;
         }         
     }
@@ -916,7 +895,6 @@ let imgClose = document.querySelector(".close-max img");
 
 imgClose.addEventListener("click", event => {
 
-    event.preventDefault();
     cerrarMax();
     borrarMaximizar();
 
@@ -1108,7 +1086,7 @@ let arrayResultadosTrending = [] //creo un array para los resultados de ésta se
 
 async function trendingGifos() {
 
-    const resp3 = await fetch(`http://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=12`);
+    const resp3 = await fetch(`https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=12`);
     const trendGifos = await resp3.json();
 
     for(v = 0; v < trendGifos.data.length; v++){
@@ -1133,7 +1111,7 @@ async function trendingGifos() {
     }
 }
 
-trendingGifos();
+trendingGifos(); //llamo a la función para que se cargue al iniciar la página
 
 
 // SLIDE DE LA SECCIÓN ``TRENDING GIFOS´´

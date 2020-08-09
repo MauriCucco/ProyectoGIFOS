@@ -42,6 +42,7 @@ header nav {
     background-color: rgba(87,46,229,0.90);
     height: 100%;
     padding-top: 1.7rem; 
+    z-index: 2;
     display: none;
 }
 .menuhamburguesa  ul li {
@@ -257,7 +258,7 @@ span.separacion {
 }
 .informa {
     margin: 11rem auto 13.7rem auto;
-    width: 31%;
+    width: 64%;
 }
 
 /*SECCION TRENDING-SLIDE*/
@@ -461,6 +462,12 @@ footer p:nth-last-child() {
 /* SECCION MIS GIFOS*/
 
 #mis-gifos {
+    display: none;
+}
+
+/* SECCION CREAR GIFOS */
+
+#crear-gifos {
     display: none;
 }
 
@@ -674,8 +681,7 @@ footer p:nth-last-child() {
     .slide {
         max-width: 121.8rem;
         align-items: center;
-        margin-left: 9.4rem;
-        margin-right: 9.4rem;
+        margin: 0 auto;
     }
     .galeria-trending {
         overflow: hidden;
@@ -818,6 +824,9 @@ footer p:nth-last-child() {
     #ver-mas:hover, #ver-mas-favoritos:hover {
         background-color: #572EE5;
         color: white;
+    }
+    .informa {
+        width: 31%;
     }
 
 
@@ -967,10 +976,6 @@ footer p:nth-last-child() {
 
 
     /* SECCIÓN ``CREAR GIFOS´´*/
-
-    #crear-gifos {
-        display: none;
-    }
 
     #primer-fila {
         display: flex;

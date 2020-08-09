@@ -131,6 +131,25 @@ function eliminarGifo() {
 
     let iconEliminar = document.getElementsByClassName("eliminar");
     let divImagenGifos = document.getElementsByClassName("imagen-gifos");
+    let imagenMaxGifos = document.getElementsByClassName("gifs-max-gifos");
+    let gifMax = document.getElementById("gif-maximizado");
+    let galeriaImagenesMax = document.getElementById("galeria-max");
+
+    if(imagenMaxGifos.length != 0) {
+
+        gifMax.style.display = "none";
+        galeriaImagenesMax.innerHTML = "";
+        seccionGifos.style.display = "unset";
+        header.style.display = "";
+        footer.style.display = "";
+        seccionTrending.style.display = "";
+        enGifos = false;
+
+        for(p = 0; p < iconEliminar.length; p++) {
+
+            iconEliminar[posicionGifo].classList.add("activado");
+        }
+    }
 
     for(e = 0; e < iconEliminar.length; e++) {
 
@@ -181,6 +200,8 @@ function maximizarGifo() {
             iconEliminar.setAttribute("src", "images/icon_trash.svg");
 
             posicionGifo= l;
+
+            linkClose.setAttribute("href", "#mis-gifos"); //para luego cerrar e ir a esa sección
             
             return;
         }  

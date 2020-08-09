@@ -93,6 +93,7 @@ botonComenzar.addEventListener("click", event => {
         pasos.style.marginRight = "20%";
         cronometro.textContent = "REPETIR CAPTURA";
         recorder.stopRecording();
+        track.stop(); // apago la cámara
         botonComenzar.textContent = "SUBIR GIFO";
         return
 
@@ -204,6 +205,7 @@ botonComenzar.addEventListener("click", event => {
 // FUNCIÓN PARA USAR LA CÁMARA Y PREPARAR EL PASO 2
 
 let recorder; //para luego usar el objeto recorder
+let track;
 
 function getStreamAndRecord() { 
 
@@ -213,9 +215,12 @@ function getStreamAndRecord() {
                 height: { max: 480 }
             }
 
-        }).then(function(stream) {
+        })
+        .then(function(stream) {
 
         video.srcObject = stream;
+
+        track = stream.getTracks()[0]; // para parar la cámara cuando todo haya finalizado
 
         recorder = RecordRTC(stream, { //OBJETO RECORDER
             type: 'gif',

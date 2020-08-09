@@ -43,7 +43,8 @@ header nav {
     right: 0;
     background-color: black;
     height: 100%;
-    padding-top: 1.7rem; 
+    padding-top: 1.7rem;
+    z-index: 2;
     display: none;
 }
 .menuhamburguesa  ul li {
@@ -260,7 +261,7 @@ span.separacion {
 }
 .informa {
     margin: 11rem auto 13.7rem auto;
-    width: 31%;
+    width: 64%;
 }
 
 /*SECCION TRENDING-SLIDE*/
@@ -672,8 +673,7 @@ footer p:nth-last-child() {
     .slide {
         max-width: 121.8rem;
         align-items: center;
-        margin-left: 9.4rem;
-        margin-right: 9.4rem;
+        margin: 0 auto;
     }
     .galeria-trending {
         overflow: hidden;
@@ -816,6 +816,9 @@ footer p:nth-last-child() {
     #ver-mas:hover, #ver-mas-favoritos:hover {
         background-color: white;
         color: black;
+    }
+    .informa {
+        width: 31%;
     }
 
 
