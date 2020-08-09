@@ -98,14 +98,14 @@ document.addEventListener("click", event => {
 
             closeInputSearch(); //cierra el input al clickear fuera de él
 
-    }else if (inactivo.className == "inactivo inactivo-activo"
-              && event.target.localName == "p") {
+    }else if (event.target.className == "list-p list-p-activo") {
 
             input.value = event.target.textContent;
-            arrayResultados = []; //reseteo el array que guarda la info de los resultados
             galeria.innerHTML = ""; //limpio la sección
-            busqueda(input.value);
+            busqueda(event.target.textContent);
             setTimeout(function() {activarHistorial()}, 1000); //tildo los favoritos del historial
+            cont = 0; //reseteo el contador del parámetro offset 
+            arrayResultados = []; //reseteo el array que guarda la info de los resultados
 
     }else if(event.target.getAttribute("src") == "images/icon-fav-active.svg"
              || event.target.getAttribute("src") == "images/icon-fav-active-noc.svg") {
@@ -350,6 +350,9 @@ function busqueda(string) {
     .then( resp => {
 
         let linkDescarga = document.getElementsByClassName("descarga");
+
+        input.blur(); //para sacar el teclado del celu
+        seccionBusquedas.focus();
 
         if(resp.data.length == 0
             && input.value != "") {
