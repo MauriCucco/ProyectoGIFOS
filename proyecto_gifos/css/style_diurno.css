@@ -289,6 +289,9 @@ span.separacion {
     font-size: 1.6rem;
     line-height: 2.3rem;
 }
+#trending-slide .imagen:nth-child(1) {
+    margin-left: 0;
+}
 .slide {
     margin-left: 2.2rem;
     display: flex;
@@ -302,9 +305,6 @@ span.separacion {
 .imagen, .imagen-gifos {
     margin-left: 1.1rem;
     margin-right: 1.1rem;
-}
-.imagen:nth-child(1), .imagen-gifos:nth-child(1) {
-    margin-left: 0;
 }
 #trending-slide .imagen:last-child img {
     margin-right: 2.2rem;
@@ -786,7 +786,6 @@ footer p {
     #trending-slide .imagen:last-child img {
         margin-right: 0;
     }
-
      /* SECCION BUSQUEDAS */
     
     span.separacion {
