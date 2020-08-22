@@ -24,13 +24,13 @@ function inputSearch() {
         input.classList.add("input-activo");
         inactivo.classList.add("inactivo-activo");
         lista.classList.add("sugerencias-activo");
-        for(i = 0; i < li.length; i++) {
+        for(let i = 0; i < li.length; i++) {
             li[i].classList.add("li-sugerencias-activo"); 
         }
-        for(i = 0; i < li.length; i++) {
+        for(let i = 0; i < li.length; i++) {
             img[i].classList.add("list-img-activo"); 
         }
-        for(i = 0; i < li.length; i++) {
+        for(let i = 0; i < li.length; i++) {
             p[i].classList.add("list-p-activo"); 
         }
         search.classList.add("search-activo");
@@ -56,13 +56,13 @@ function closeInputSearch() {
     input.classList.remove("input-activo");
     inactivo.classList.remove("inactivo-activo");
     lista.classList.remove("sugerencias-activo");
-    for(i = 0; i < li.length; i++) {
+    for(let i = 0; i < li.length; i++) {
         li[i].classList.remove("li-sugerencias-activo"); 
     }
-    for(i = 0; i < li.length; i++) {
+    for(let i = 0; i < li.length; i++) {
         img[i].classList.remove("list-img-activo"); 
     }
-    for(i = 0; i < li.length; i++) {
+    for(let i = 0; i < li.length; i++) {
         p[i].classList.remove("list-p-activo"); 
     }
     search.classList.remove("search-activo");
@@ -283,7 +283,7 @@ function sugerencias() {
 
         let arraySugerencias = Object.values(response.data);
 
-        for(j = 0; j < arraySugerencias.length; j++) {
+        for(let j = 0; j < arraySugerencias.length; j++) {
 
             crearSugerencia(response.data[j].name);
         }
@@ -383,7 +383,7 @@ function busqueda(string) {
             galeria.style.display = "flex";
             closeInputSearch();
 
-            for(r = 0; r < resp.data.length; r++) {
+            for(let r = 0; r < resp.data.length; r++) {
 
                 crearTarjeta(resp.data[r].images.fixed_height_downsampled.url, resp.data[r].title, resp.data[r].username, ".galeria-imagenes", "maximizar", "favorito", "descarga", "imagen");
 
@@ -420,7 +420,7 @@ async function trendingPopulares() {
     const resp2 = await fetch(`https://api.giphy.com/v1/trending/searches?api_key=${apiKey}`);
     const trendings = await resp2.json();
 
-    for(k = 0; k < contenidoTrending.length; k++) {
+    for(let k = 0; k < contenidoTrending.length; k++) {
 
         contenidoTrending[k].textContent = `${trendings.data[k]}`;
 
@@ -541,7 +541,7 @@ function guardarInfo() {
             return;
         }
 
-        for(q = 0; q < iconFavorito.length; q++) {
+        for(let q = 0; q < iconFavorito.length; q++) {
 
             if(iconFavorito[q].className == "favorito tildado") {
 
@@ -580,7 +580,7 @@ function guardarInfo() {
             return;
         }
 
-        for(t = 0; t < iconFavoritoTrending.length; t++) {
+        for(let t = 0; t < iconFavoritoTrending.length; t++) {
 
             if(iconFavoritoTrending[t].getAttribute("src") == "images/icon-fav-active.svg"
             && iconFavoritoTrending[t].className != "favorito trending tildado guardado") {
@@ -631,7 +631,7 @@ function borrarInfo() {
         }
     }
 
-    for(g = 0; g < iconFavorito.length; g++) {
+    for(let g = 0; g < iconFavorito.length; g++) {
 
         if(iconFavorito[g].className == "favorito guardado") {
 
@@ -672,7 +672,7 @@ function borrarInfo() {
         return;
     }
 
-    for(e = 0; e < arrayResultadosTrending.length; e++) {
+    for(let e = 0; e < arrayResultadosTrending.length; e++) {
 
         if(iconFavoritoTrending[e].className == "favorito trending guardado") {
 
@@ -690,7 +690,7 @@ function borrarItemFavoritos(array, numero) {
 
     let index2;
 
-    for (i = 0; i < arrayFavoritos.length; i++) {
+    for (let i = 0; i < arrayFavoritos.length; i++) {
                         
         if(arrayFavoritos[i].id == array[numero].id) {
                     
@@ -800,7 +800,7 @@ function maximizarGif() {
     footer.style.display = "none";
     gifMax.style.display = "unset";
 
-    for(l = 0; l < arrayResultados.length; l++) {
+    for(let l = 0; l < arrayResultados.length; l++) {
 
         if(iconMaximizar[l].className == "maximizar activado"
            || imagenMax[l].className == "gifs activado") {
@@ -818,7 +818,7 @@ function maximizarGif() {
         }  
     }
     
-    for(u = 0; u < arrayResultadosTrending.length; u++) {
+    for(let u = 0; u < arrayResultadosTrending.length; u++) {
 
         if(iconMaximizarTrending[u].className == "maximizar trending activado"
            || imagenMaxTrending[u].className == "gifs trending activado") {
@@ -859,7 +859,7 @@ function borrarMaximizar() {
     let imagenMaxTrending = document.getElementsByClassName("gifs trending");
     let imagenMaxSeccion = document.getElementsByClassName("gifs seccion");
 
-    for(l = 0; l < arrayResultados.length; l++) {
+    for(let l = 0; l < arrayResultados.length; l++) {
 
         if(iconMaximizar[l].className == "maximizar activado"
            || imagenMax[l].className == "gifs activado") {
@@ -871,7 +871,7 @@ function borrarMaximizar() {
         }         
     } 
 
-    for(s = 0; s < arrayResultadosTrending.length; s++) {
+    for(let s = 0; s < arrayResultadosTrending.length; s++) {
 
         if(iconMaximizarTrending[s].className == "maximizar trending activado"
            || imagenMaxTrending[s].className == "gifs trending activado") {
@@ -885,7 +885,7 @@ function borrarMaximizar() {
 
     if(arraySeccionFavoritos != undefined) {
 
-        for(m = 0; m < arraySeccionFavoritos.length; m++) {
+        for(let m = 0; m < arraySeccionFavoritos.length; m++) {
 
             if(iconMaximizarSeccion[m].className == "maximizar seccion activado"
                || imagenMaxSeccion[m].className == "gifs seccion activado") {
@@ -900,7 +900,7 @@ function borrarMaximizar() {
     
     if(arraySeccionGifos != undefined) {
 
-        for(n = 0; n < arraySeccionGifos.length; n++) {
+        for(let n = 0; n < arraySeccionGifos.length; n++) {
 
             if(iconMaximizarGifos[n].className == "maximizar gifos activado") {
 
@@ -1113,7 +1113,7 @@ async function trendingGifos() {
     const resp3 = await fetch(`https://api.giphy.com/v1/gifs/trending?api_key=${apiKey}&limit=12`);
     const trendGifos = await resp3.json();
 
-    for(v = 0; v < trendGifos.data.length; v++){
+    for(let v = 0; v < trendGifos.data.length; v++){
 
         crearTarjeta(trendGifos.data[v].images.fixed_height_downsampled.url, trendGifos.data[v].title, trendGifos.data[v].username, ".galeria-trending", "maximizar", "favorito", "descarga", "imagen");
 
@@ -1125,7 +1125,7 @@ async function trendingGifos() {
     let linkDescarga = document.getElementsByClassName("descarga");
     let imagenTrending = document.getElementsByClassName("gifs");
 
-    for(w = 0; w < arrayResultadosTrending.length; w++) {
+    for(let w = 0; w < arrayResultadosTrending.length; w++) {
 
         favoritosTrending[w].classList.add("trending"); //le agrego una clase para distinguirlos
         maximizarTrending[w].classList.add("trending"); //le agrego una clase para distinguirlos
@@ -1331,7 +1331,7 @@ let arrayHistorial = JSON.parse(historial);
 
 arrayFavoritos = []; //reseteo el arrayFavoritos
 
-for(f = 0; f < arrayHistorial.length; f++) {
+for(let f = 0; f < arrayHistorial.length; f++) {
 
     arrayFavoritos.push(arrayHistorial[f]); //para que quede también en la sección ``Favoritos´´
 }
@@ -1344,7 +1344,7 @@ let idResultadosTrending = []; //los id del arrayResultadosTrending
 
 setTimeout(function() { //le doy un tiempo para que cargue bien el arrayResultadosTrending
 
-    for(z = 0; z < arrayResultadosTrending.length; z++) {
+    for(let z = 0; z < arrayResultadosTrending.length; z++) {
 
         idResultadosTrending.push(arrayResultadosTrending[z].id); //guardo los id de arrayResultadosTrending
 
@@ -1352,7 +1352,7 @@ setTimeout(function() { //le doy un tiempo para que cargue bien el arrayResultad
 
     if(arrayHistorial != null) {
 
-        for(w = 0; w < arrayHistorial.length; w++){
+        for(let w = 0; w < arrayHistorial.length; w++){
 
             let loTiene = idResultadosTrending.findIndex(function(obj) {
 
@@ -1367,7 +1367,7 @@ setTimeout(function() { //le doy un tiempo para que cargue bien el arrayResultad
     
     let iconFavoritoTrending = document.getElementsByClassName("favorito trending");
 
-    for(k = 0; k < posicionesHistorialTrending.length; k++) { //uso las posiciones que guardé
+    for(let k = 0; k < posicionesHistorialTrending.length; k++) { //uso las posiciones que guardé
 
         if(posicionesHistorialTrending[k] != -1) {
 
@@ -1389,7 +1389,7 @@ let idResultados = []; //los id del arrayResultados
 
 function activarHistorial() {
 
-    for(z = 0; z < arrayResultados.length; z++) {
+    for(let z = 0; z < arrayResultados.length; z++) {
 
         idResultados.push(arrayResultados[z].id); //guardo los id de arrayResultadosTrending
 
@@ -1397,7 +1397,7 @@ function activarHistorial() {
 
     if(arrayHistorial != null) {
 
-       for(w = 0; w < arrayHistorial.length; w++){
+       for(let w = 0; w < arrayHistorial.length; w++){
 
             let loTiene = idResultados.findIndex(function(obj) {
 
@@ -1411,7 +1411,7 @@ function activarHistorial() {
 
     let iconFavorito = document.getElementsByClassName("favorito");
 
-    for(k = 0; k < posicionesHistorialBusquedas.length; k++) { //uso las posiciones que guardé
+    for(let k = 0; k < posicionesHistorialBusquedas.length; k++) { //uso las posiciones que guardé
 
         if(posicionesHistorialBusquedas[k] != -1) {
 

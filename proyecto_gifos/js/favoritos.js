@@ -55,7 +55,7 @@ function favoritos(array) {
         let titulosGifo = document.getElementsByClassName("titulo-gifo");
         let imagenFavoritos = document.getElementsByClassName("gifs");
 
-        for(r = 0; r < array.length; r++) {
+        for(let r = 0; r < array.length; r++) {
 
             crearTarjeta(array[r].images.fixed_height_downsampled.url, array[r].title, array[r].username, ".galeria-imagenes-favoritos", "maximizar seccion", "favorito", "descarga", "imagen");
 
@@ -85,7 +85,7 @@ function favoritos(array) {
         let titulosGifo = document.getElementsByClassName("titulo-gifo");
         let imagenFavoritos = document.getElementsByClassName("gifs");
 
-        for(r = 0; r < 12; r++) {
+        for(let r = 0; r < 12; r++) {
 
             crearTarjeta(array[r].images.fixed_height_downsampled.url, array[r].title, array[r].username, ".galeria-imagenes-favoritos", "maximizar seccion", "favorito", "descarga", "imagen");
 
@@ -122,7 +122,7 @@ verMasFavoritos.addEventListener("click", () => {
         let imagenFavoritos = document.getElementsByClassName("gifs");
         let vueltas;
 
-        for(r = contFav; r < arraySeccionFavoritos.length; r++) {
+        for(let r = contFav; r < arraySeccionFavoritos.length; r++) {
 
             crearTarjeta(arraySeccionFavoritos[r].images.fixed_height_downsampled.url, arraySeccionFavoritos[r].title, arraySeccionFavoritos[r].username, ".galeria-imagenes-favoritos", "maximizar seccion", "favorito", "descarga", "imagen");
 
@@ -164,7 +164,7 @@ function borrarFavoritoSeccion() {
     let iconSeccionFavoritos = document.getElementsByClassName("favorito seccion");
     let indice;
 
-    for(d = 0; d < iconSeccionFavoritos.length; d++) {
+    for(let d = 0; d < iconSeccionFavoritos.length; d++) {
 
         if(iconSeccionFavoritos[d].className == "favorito seccion guardado") {
  
@@ -177,7 +177,7 @@ function borrarFavoritoSeccion() {
 
     let indexBorrar;
 
-    for (l = 0; l < arrayFavoritos.length; l++) {
+    for (let l = 0; l < arrayFavoritos.length; l++) {
                         
         if(arrayFavoritos[l].id == idSeccionFavorito) {
                     
@@ -192,7 +192,7 @@ function borrarFavoritoSeccion() {
 
     let iconFavoritoTrending = document.getElementsByClassName("favorito trending"); //TRENDING GIFOS
 
-    for (h = 0; h < arrayResultadosTrending.length; h++) {
+    for (let h = 0; h < arrayResultadosTrending.length; h++) {
                         
         if(arrayResultadosTrending[h].id == idSeccionFavorito) {
                     
@@ -200,7 +200,7 @@ function borrarFavoritoSeccion() {
         }
     }
     
-    for (k = 0; k < arrayResultados.length; k++) {
+    for (let k = 0; k < arrayResultados.length; k++) {
                         
         if(arrayResultados[k].id == idSeccionFavorito) {
                     
@@ -245,7 +245,7 @@ function guardarFavoritoSeccion() {
 
     let iconSeccionFavoritos = document.getElementsByClassName("favorito seccion");
 
-    for(d = 0; d < iconSeccionFavoritos.length; d++) {
+    for(let d = 0; d < iconSeccionFavoritos.length; d++) {
 
         if(iconSeccionFavoritos[d].className == "favorito seccion tildado") {
  
@@ -261,7 +261,7 @@ function guardarFavoritoSeccion() {
 
     let iconFavoritoTrending = document.getElementsByClassName("favorito trending"); //TRENDING GIFOS
 
-    for (h = 0; h < arrayResultadosTrending.length; h++) {
+    for (let h = 0; h < arrayResultadosTrending.length; h++) {
                         
         if(arrayResultadosTrending[h].id == idSeccionFavorito) {
                     
@@ -300,7 +300,7 @@ function maximizarFavorito() {
     footer.style.display = "none";
     gifMax.style.display = "unset";
 
-    for(l = 0; l < arraySeccionFavoritos.length; l++) {
+    for(let l = 0; l < arraySeccionFavoritos.length; l++) {
 
         if(imgMaximizar[l].className == "maximizar seccion activado"
            || imagenSeccion[l].className == "gifs seccion activado") {
@@ -327,7 +327,7 @@ function mantenerActivadoSeccion() {
     let iconMaxSeccion = document.querySelector("img#itemBusqueda.favorito.seccion-max");
     let titulo = document.getElementById("item2").textContent;
 
-    for (h = 0; h < arrayFavoritos.length; h++) {
+    for (let h = 0; h < arrayFavoritos.length; h++) {
         
         if(arrayFavoritos[h].title == titulo) {
                             
@@ -359,7 +359,7 @@ function tildarMaxFavorito() {
 
     iconFavMax.classList.add("guardado");
 
-    for(t = 0; t < titulosGifoSeccion.length; t++) {
+    for(let t = 0; t < titulosGifoSeccion.length; t++) {
 
         if(titulosGifoSeccion[t].textContent == titulo) {
 
@@ -380,7 +380,7 @@ function borrarMaxFavorito() {
 
     iconFavMax.classList.remove("guardado");
 
-    for(t = 0; t < titulosGifoSeccion.length; t++) {
+    for(let t = 0; t < titulosGifoSeccion.length; t++) {
 
         if(titulosGifoSeccion[t].textContent == titulo) {
 

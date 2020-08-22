@@ -1,10 +1,11 @@
 // MENÚ HAMBURGUESA DE MOBILE
 
+let menuHamburguesa = document.querySelector(".menu");
+
 document.addEventListener("click", event => {
 
     if (window.matchMedia("(max-width: 1199px)").matches) {
 
-        let menuHamburguesa = document.querySelector(".menu");
         let checkbox = document.getElementById("hamburguesa_checkbox");
 
         if(event.target.id == "hamburguesa_checkbox") {
@@ -49,6 +50,7 @@ modoNocturno.setAttribute("rel", "stylesheet");
 modoNocturno.setAttribute("href", "css/style_nocturno.css")
 let gifos = document.querySelector("text#texto-gifos");
 let head = document.getElementById("head");
+let spanHamburguesa = document.getElementsByClassName("hamburguesa");
 let searchIcon = document.querySelector(".search-icon");
 let close = document.querySelector(".close");
 let camara = document.querySelector(".camara");
@@ -61,6 +63,16 @@ modo.addEventListener("click", () => {
         head.appendChild(modoNocturno);
 
         event.target.textContent = "Modo Diurno";
+        
+        if (window.matchMedia("(max-width: 1199px)").matches) {
+
+            menuHamburguesa.style.backgroundColor = "black";
+
+            for(let i = 0; i < spanHamburguesa.length; i++) {
+
+                spanHamburguesa[i].style.backgroundColor = "white";
+            }
+        }
 
         body.style.backgroundColor = "rgb(55, 56, 60)";
 
@@ -82,6 +94,16 @@ modo.addEventListener("click", () => {
         event.target.textContent = "Modo Nocturno";
 
         gifos.style.fill = "#572EE5";
+
+        if (window.matchMedia("(max-width: 1199px)").matches) {
+
+            menuHamburguesa.style.backgroundColor = "rgba(87,46,229,0.90)";
+
+            for(let i = 0; i < spanHamburguesa.length; i++) {
+
+                spanHamburguesa[i].style.backgroundColor = "rgba(87,46,229,0.90)";
+            }
+        }
 
         body.style.backgroundColor = "unset";
 

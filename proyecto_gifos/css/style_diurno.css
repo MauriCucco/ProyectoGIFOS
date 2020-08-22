@@ -967,6 +967,10 @@ footer p {
 
     /* SECCIÓN FAVORITOS */
 
+    .titulo-seccion {
+        font-size: 2.5rem;
+    }
+
     .icono-seccion {
         margin: 1.1rem auto 0.8rem auto;
     }

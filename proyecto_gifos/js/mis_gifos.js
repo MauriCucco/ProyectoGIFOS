@@ -49,7 +49,7 @@ function mostrarGifos(array) { //es como la funcion favoritos() pero modificada 
 
     }else if(array.length <= 12) {
 
-        for(r = 0; r < array.length; r++) {
+        for(let r = 0; r < array.length; r++) {
 
             crearTarjeta(array[r].images.fixed_height_downsampled.url, array[r].title, array[r].username, ".galeria-gifos", "maximizar gifos", "eliminar", "descarga-gifos", "imagen-gifos");
 
@@ -69,7 +69,7 @@ function mostrarGifos(array) { //es como la funcion favoritos() pero modificada 
 
         contGif = 0;
 
-        for(r = 0; r < 12; r++) {
+        for(let r = 0; r < 12; r++) {
 
             crearTarjeta(array[r].images.fixed_height_downsampled.url, array[r].title, array[r].username, ".galeria-gifos", "maximizar gifos", "eliminar", "descarga-gifos", "imagen-gifos");
 
@@ -98,7 +98,7 @@ verMasGifos.addEventListener("click", () => {
 
         let vueltas;
 
-        for(r = contGif; r < arraySeccionGifos.length; r++) {
+        for(let r = contGif; r < arraySeccionGifos.length; r++) {
 
             crearTarjeta(arraySeccionGifos[r].images.fixed_height_downsampled.url, arraySeccionGifos[r].title, arraySeccionGifos[r].username, ".galeria-imagenes-favoritos", "maximizar seccion", "eliminar", "descarga-gifos", "imagen-gifos");
 
@@ -145,13 +145,13 @@ function eliminarGifo() {
         seccionTrending.style.display = "";
         enGifos = false;
 
-        for(p = 0; p < iconEliminar.length; p++) {
+        for(let p = 0; p < iconEliminar.length; p++) {
 
             iconEliminar[posicionGifo].classList.add("activado");
         }
     }
 
-    for(e = 0; e < iconEliminar.length; e++) {
+    for(let e = 0; e < iconEliminar.length; e++) {
 
         if(iconEliminar[e].className = "eliminar activado") {
 
@@ -189,7 +189,7 @@ function maximizarGifo() {
     footer.style.display = "none";
     gifMax.style.display = "unset";
 
-    for(l = 0; l < arraySeccionGifos.length; l++) {
+    for(let l = 0; l < arraySeccionGifos.length; l++) {
 
         if(imgMaximizar[l].className == "maximizar gifos activado") {
 
