@@ -1,4 +1,3 @@
-
 //FUNCIONALIDAD DEL INPUT DE BÚSQUEDA
 
 let input = document.getElementById("input-busqueda");
@@ -1331,10 +1330,14 @@ let arrayHistorial = JSON.parse(historial);
 
 arrayFavoritos = []; //reseteo el arrayFavoritos
 
-for(let f = 0; f < arrayHistorial.length; f++) {
+if(arrayHistorial) {
+    for(let f = 0; f < arrayHistorial.length; f++) {
 
-    arrayFavoritos.push(arrayHistorial[f]); //para que quede también en la sección ``Favoritos´´
+        arrayFavoritos.push(arrayHistorial[f]); //para que quede también en la sección ``Favoritos´´
+    }
 }
+
+
 
 
 // SECCIÓN ``TRENDING GIFOS´´
@@ -1424,5 +1427,50 @@ function activarHistorial() {
         
     }
 
+}
+
+
+//ESTILO NOCTURNO/DIURNO
+
+let modo = document.getElementById("primero");
+let tipoDeVista = localStorage.getItem("estilo");
+let estilo = document.getElementById("estilo");
+let gifos = document.querySelector("text#texto-gifos");
+let head = document.getElementById("head");
+let searchIcon = document.querySelector(".search-icon");
+let close = document.querySelector(".close");
+let camara = document.querySelector(".camara");
+let pelicula = document.getElementById("pelicula");
+
+if(tipoDeVista === "./css/style_nocturno.css") {
+
+    toModeNocturno();
+
+}else if(tipoDeVista !== null) {
+
+    estilo.setAttribute("href", tipoDeVista); //estilo es el link del index.html
+}
+
+
+function toModeNocturno() {
+        
+        let modoNocturno = "css/style_nocturno.css";
+
+        estilo.setAttribute("href", modoNocturno);
+
+        gifos.style.fill = "#FFFFFF";
+
+        modo.textContent = "Modo Diurno";
+        
+        searchIcon.setAttribute("src", "images/icon-search-mod-noc.svg");
+
+        inactivo.setAttribute("src", "images/icon-search-mod-noc.svg");
+
+        close.setAttribute("src", "images/close-noc.svg");
+
+        camara.setAttribute("src", "images/camara-modo-noc.svg");
+        pelicula.setAttribute("src", "images/pelicula-modo-noc.svg");
+
+        localStorage.setItem("estilo", modoNocturno);
 }
 

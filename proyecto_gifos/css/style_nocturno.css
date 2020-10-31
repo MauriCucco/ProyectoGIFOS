@@ -12,6 +12,9 @@ p, h1, h2{
     text-align: center;
     color: white;
 }
+body {
+    background-color: #37383C;
+}
 body a {
     text-decoration: none;
     text-align: center;
@@ -460,6 +463,19 @@ footer p {
     line-height: 30px;
     margin-bottom: 4.6rem;
 }
+
+/* SECCION MIS GIFOS*/
+
+#mis-gifos {
+    display: none;
+}
+
+/* SECCION CREAR GIFOS */
+
+#crear-gifos {
+    display: none;
+}
+
 
 
 /* VERSIÓN DESKTOP*/
