@@ -12,7 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap"
       rel="stylesheet"
     />
-    <link id="estilo" rel="stylesheet" href="./css/style_diurno.css" />
+    <link id="theme-link" rel="stylesheet" href="./css/style_diurno.css" />
   </head>
   <body id="body">
     <header id="header">
@@ -95,7 +95,7 @@
               <span class="line"></span>
             </li>
           </ul>
-          <div id="crear">
+          <div id="crear" title="Crea tu propio gif">
             <span class="suma"></span>
             <span class="suma"></span>
           </div>
@@ -123,10 +123,12 @@
               <div class="borde"></div>
             </div>
             <div id="div-video">
-              <h1 class="titulo-crear">Aquí podrás</h1>
-              <h1 class="titulo-crear2">crear tus propios</h1>
-              <p class="parrafo-crear">¡Crea tu GIFO en sólo 3 pasos!</p>
+              <h1 class="titulo-crear">
+                Aquí podrás <br />
+                crear tus propios
+              </h1>
               <p class="parrafo-crear">
+                ¡Crea tu GIFO en sólo 3 pasos! <br />
                 (sólo necesitas una cámara para grabar un video)
               </p>
             </div>
@@ -255,7 +257,7 @@
     <section id="gif-maximizado">
       <div id="div-max">
         <div class="div-close">
-          <a class="close-max" href=""
+          <a class="close-max" href="#"
             ><img
               class="close"
               src="images/button-close.svg"
@@ -274,7 +276,7 @@
       </div>
     </section>
     <section id="trending-slide">
-      <h2 class="h2">Trending GIFOS</h2>
+      <h2 class="h2-trending">Trending GIFOS</h2>
       <div class="parrafo">
         <p>Mira los últimos</p>
         <p>GIFOS de nuestra comunidad.</p>
@@ -309,10 +311,11 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://www.WebRTC-Experiment.com/RecordRTC.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/script_mobile_y_nocturno.js"></script>
-    <script src="js/favoritos.js"></script>
-    <script src="js/crear_gifos.js"></script>
-    <script src="js/mis_gifos.js"></script>
+    <script src="js/home.js" type="module"></script>
+    <script src="js/mobile.js" type="module"></script>
+    <script src="js/modo_nocturno.js" type="module"></script>
+    <script src="js/favoritos.js" type="module"></script>
+    <script src="js/crear_gifos.js" type="module"></script>
+    <script src="js/mis_gifos.js" type="module"></script>
   </body>
 </html>
