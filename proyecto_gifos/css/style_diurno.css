@@ -21,6 +21,21 @@ body input,
 body button {
   outline: none;
 }
+
+/* SECCION MIS GIFOS*/
+
+#mis-gifos {
+  display: none;
+}
+
+/* SECCION CREAR GIFOS */
+
+#crear-gifos {
+  display: none;
+}
+
+/*HEADER*/
+
 header {
   height: 10rem;
   border-top: #572ee5 0.5rem solid;
@@ -522,18 +537,6 @@ footer p {
   text-align: center;
   line-height: 30px;
   margin-bottom: 4.6rem;
-}
-
-/* SECCION MIS GIFOS*/
-
-#mis-gifos {
-  display: none;
-}
-
-/* SECCION CREAR GIFOS */
-
-#crear-gifos {
-  display: none;
 }
 
 /* VERSIÓN DESKTOP*/

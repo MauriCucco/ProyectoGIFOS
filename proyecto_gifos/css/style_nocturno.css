@@ -25,6 +25,21 @@ body input,
 body button {
   outline: none;
 }
+
+/* SECCION MIS GIFOS*/
+
+#mis-gifos {
+  display: none;
+}
+
+/* SECCION CREAR GIFOS */
+
+#crear-gifos {
+  display: none;
+}
+
+/*HEADER*/
+
 header {
   height: 10rem;
   border-top: black 0.5rem solid;
@@ -206,8 +221,8 @@ span.hamburguesa {
 .search {
   z-index: 1;
   position: absolute;
-  bottom: 1.1rem;
-  left: 14.6rem;
+  bottom: 23.4rem;
+  left: 30.6rem;
   margin-right: 2rem;
 }
 .search .search-icon {
@@ -528,18 +543,6 @@ footer p {
   margin-bottom: 4.6rem;
 }
 
-/* SECCION MIS GIFOS*/
-
-#mis-gifos {
-  display: none;
-}
-
-/* SECCION CREAR GIFOS */
-
-#crear-gifos {
-  display: none;
-}
-
 /* VERSIÓN DESKTOP*/
 
 @media screen and (min-width: 1200px) {
@@ -712,6 +715,7 @@ footer p {
   }
   .search {
     left: 51rem;
+    bottom: 1.2rem;
   }
   .search-activo {
     position: absolute;

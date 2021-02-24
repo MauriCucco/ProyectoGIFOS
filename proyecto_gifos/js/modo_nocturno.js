@@ -12,7 +12,7 @@ const peliculaImage = document.getElementById("pelicula");
 // MODO NOCTURNO
 
 modo.addEventListener("click", function () {
-  if (theme.getAttribute("href") == "./css/style_diurno.css") {
+  if (!modoNocturno) {
     modoNocturno = true;
     theme.href = "css/style_nocturno.css";
     gifos.style.fill = "#FFFFFF";
@@ -20,7 +20,7 @@ modo.addEventListener("click", function () {
     searchIcon.setAttribute("src", "images/icon-search-mod-noc.svg");
     camaraImage.setAttribute("src", "images/camara-modo-noc.svg");
     peliculaImage.setAttribute("src", "images/pelicula-modo-noc.svg");
-  } else {
+  } else if (modoNocturno) {
     modoNocturno = false;
     theme.href = "./css/style_diurno.css";
     modo.textContent = "Modo Nocturno";
