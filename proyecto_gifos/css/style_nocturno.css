@@ -1190,6 +1190,7 @@ footer p {
     cursor: pointer;
     border-bottom: 0.2rem solid #5ed7c6;
     margin-left: unset;
+    width: 13rem;
   }
   #tercera-columna {
     display: flex;

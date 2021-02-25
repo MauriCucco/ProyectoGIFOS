@@ -38,7 +38,7 @@ export const getGifs = async (endpoint, number, value = "") => {
     let endPoint = `${urlServer}/${endpoint}?q=${value}&api_key=${apiKey}&limit=${number}&lang=es`;
     const resp = await fetch(endPoint);
     const { data } = await resp.json();
-    const dataLight = data.map((elemento) => {
+    return data.map((elemento) => {
       return {
         id: elemento.id,
         images: elemento.images,
@@ -47,8 +47,6 @@ export const getGifs = async (endpoint, number, value = "") => {
         name: elemento.name,
       };
     });
-
-    return dataLight;
   } catch (error) {
     throw error;
   }
@@ -90,8 +88,7 @@ export async function createBlob(url) {
   try {
     const response = await fetch(url);
     const blob = await response.blob();
-    const urlBlob = URL.createObjectURL(blob);
-    return urlBlob;
+    return URL.createObjectURL(blob);
   } catch (error) {
     console.log("ERROR: ", error);
   }
@@ -148,8 +145,8 @@ export async function crearTarjeta(
     divIconos.appendChild(divIcon2);
     divIconos.appendChild(divIcon3);
     divIcon1.appendChild(imgIcon1);
-    esFavorito(idImagen, imgIcon1); //veo si está en el array de favoritos
     divIcon2.appendChild(linkDescarga);
+    linkDescarga.setAttribute("download", "download");
     linkDescarga.setAttribute("target", "_blank");
     linkDescarga.appendChild(imgIcon2);
     imgIcon2.setAttribute("src", "images/icon-download.svg");
@@ -159,13 +156,14 @@ export async function crearTarjeta(
     imgIcon3.setAttribute("src", "images/icon-max.svg");
     divImagen.appendChild(divInfo);
     divInfo.appendChild(usuarioP);
-
-    const href = await createBlob(url);
-    linkDescarga.setAttribute("href", href);
-
     usuarioP.textContent = usuario || "No user";
     divInfo.appendChild(tituloP);
     tituloP.textContent = titulo || "No title";
+
+    esFavorito(idImagen, imgIcon1); //veo si está en el array de favoritos
+
+    const href = await createBlob(url);
+    linkDescarga.setAttribute("href", href);
   } catch (error) {
     console.log("ERROR: ", error);
   }
@@ -213,14 +211,12 @@ export async function crearTarjetaMaximizada(
     divGridMax.appendChild(linkDescargaMax);
     divGridMax.appendChild(imgFavorito);
     linkDescargaMax.appendChild(imgDescarga);
-    linkDescargaMax.setAttribute("download", "descarga.gif");
+    linkDescargaMax.setAttribute("download", "download");
     linkDescargaMax.setAttribute("target", "_blank");
-
     usuarioMax.textContent = usuario || "No user";
     tituloMax.textContent = titulo || "No title";
 
     if (modoNocturno) {
-      //modo nocturno
       imgClose.src = "images/close-noc.svg";
       tituloMax.style.color = "white";
       imgDescarga.setAttribute("src", "images/icon-download-noc.svg");
@@ -289,7 +285,7 @@ function elegirImagenMax(array, id) {
   });
 }
 
-//FUNCIÓN PARA CERRAR GIF MAXIMIZADO
+//FUNCIÓN PARA CERRAR EL GIF MAXIMIZADO
 
 export const cerrarMax = () => {
   seccionTrending.style.display = "";
@@ -425,7 +421,8 @@ export const guardarFavorito = async (id, target) => {
       galeriaImagenesFavoritos,
       verMasFavoritos
     );
-    elegirRefresh(target);
+
+    if (seccionGifMax.style.display === "unset") elegirRefresh(target);
   } catch (error) {
     console.log("ERROR: ", error);
   }
@@ -437,11 +434,11 @@ function cambiarIconoFavorito(target, activo = true) {
   //activo en true significa que es favorito
   if (activo) {
     modoNocturno && seccionGifMax.style.display === "unset"
-      ? (target.src = "images/icon-fav-active-noc.svg")
+      ? (target.src = "images/icon-fav-active-noc.svg") //sólo para gifs maximizados
       : (target.src = "images/icon-fav-active.svg");
   } else {
     modoNocturno && seccionGifMax.style.display === "unset"
-      ? (target.src = "images/icon-fav-hover-noc.svg")
+      ? (target.src = "images/icon-fav-hover-noc.svg") //sólo para gifs maximizados
       : (target.src = "images/icon-fav-hover.svg");
   }
 }
@@ -464,7 +461,8 @@ export const borrarFavorito = (id, target) => {
     galeriaImagenesFavoritos,
     verMasFavoritos
   );
-  elegirRefresh(target);
+
+  if (seccionGifMax.style.display === "unset") elegirRefresh(target);
 };
 
 //FUNCIÓN QUE CHEQUEA SI ES FAVORITO O NO AL CREAR LA TARJETA
@@ -551,7 +549,6 @@ function elegirRefresh(target) {
 
 export const clickSeccion = (target, array, cont, noContent) => {
   target.classList.add("activo");
-
   seccionPresentacion.style.display = "none";
   seccionBusquedas.style.display = "none";
   tituloBusqueda.textContent = ""; //para que al cerrar un gif maximizado no entre en la sección de Búsquedas
@@ -618,7 +615,7 @@ function cargarSeccion(seccion, array, galeria, botonVerMas) {
   }
 }
 
-//FUNCIÓN PARA LOS BOTONES DE VER MÁS
+//FUNCIÓN PARA LOS BOTONES DE VER MÁS DE FAVORITOS Y MIS GIFOS
 
 export const verMas = (
   seccion,

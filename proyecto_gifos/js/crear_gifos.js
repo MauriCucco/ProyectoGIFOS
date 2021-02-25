@@ -54,14 +54,11 @@ botonComenzar.addEventListener("click", () => {
   const estadoBtnComenzar = botonComenzar.textContent;
 
   if (estadoBtnComenzar === "GRABAR") {
-    segundoPasoTardio();
-    return;
+    return segundoPasoTardio();
   } else if (estadoBtnComenzar === "FINALIZAR") {
-    tercerPasoTemprano();
-    return;
+    return tercerPasoTemprano();
   } else if (estadoBtnComenzar === "SUBIR GIFO") {
-    tercerPasoTardio();
-    return;
+    return tercerPasoTardio();
   }
 
   primerPaso();

@@ -130,12 +130,10 @@ input.addEventListener("keyup", (e) => {
   ) {
     galeria.innerHTML = ""; //limpio la sección
     busqueda(input.value); //busco la palabra del input
-    closeInputSearch();
-    return;
+    return closeInputSearch();
   } else if (e.key === " " && input.value == "") {
     //Al presionar backspace y el input está vacío
-    closeInputSearch(); // cierra las sugerencias
-    return;
+    return closeInputSearch(); // cierra las sugerencias
   }
 
   sugerencias();
@@ -148,8 +146,7 @@ function sugerencias() {
   getGifs("search/tags", "4", input.value)
     .then((response) => {
       if (response.length === 0) {
-        closeInputSearch();
-        return;
+        return closeInputSearch();
       }
 
       if (liSugerencias.length <= 4) {
@@ -199,8 +196,7 @@ imgSearch.addEventListener("click", (event) => {
     lista.textContent = "";
     input.value = "";
     event.preventDefault();
-    closeInputSearch();
-    return;
+    return closeInputSearch();
   }
 
   galeria.innerHTML = ""; //limpio la sección
@@ -316,11 +312,9 @@ primerBoton.addEventListener("click", () => {
 document.addEventListener("keydown", (e) => {
   if (e.key === "ArrowRight") {
     //Al presionar la flecha derecha
-
     galeriaTrend.scrollLeft += 350;
   } else if (e.key === "ArrowLeft") {
     //Al presionar la flecha izquierda
-
     galeriaTrend.scrollLeft -= 350;
   }
 });
